@@ -12,7 +12,7 @@ ele alıyor ve bir SWOT analiziyle sonuçlanıyor.
 |---|---|---|
 | [RB-HRB_Lab1-5_Foyleri_v3-3.pdf](RB-HRB_Lab1-5_Foyleri_v3-3.pdf) | Lab 1–5 föyleri: emniyet mimarisi, IEC 62443 bölgelendirme, tehdit ve risk, güvenli uzak erişim, SBOM / CVE / yama | 10 |
 | [RB-HRB_Lab6-7_Foyleri.pdf](RB-HRB_Lab6-7_Foyleri.pdf) | Lab 6–7 föyleri: CRA olay müdahale simülasyonu, yapay zekâ güvenliği | 2 |
-| [RB-HRB_SWOT_Analizi.pdf](RB-HRB_SWOT_Analizi.pdf) | Makinenin Safety 4.0 odaklı SWOT analizi, TOWS stratejileri, 90 günlük yol haritası | 12 |
+| [RB-HRB_SWOT_Analizi.pdf](RB-HRB_SWOT_Analizi.pdf) | Makinenin Safety 4.0 odaklı SWOT analizi (v2, Lab 1–7), TOWS stratejileri, 90 günlük yol haritası | 12 |
 
 ## Makine: RB-HRB hidrolik yol bloklayıcı
 
@@ -52,15 +52,16 @@ numaralı başlıklardır (SWOT, Ek A · A16).
 
 ## SWOT analizi
 
-[RB-HRB_SWOT_Analizi.pdf](RB-HRB_SWOT_Analizi.pdf), Lab 1–5 föylerini kanıt olarak kullanan, Safety 4.0 odaklı bir
-analizdir:
+[RB-HRB_SWOT_Analizi.pdf](RB-HRB_SWOT_Analizi.pdf), Lab 1–7 föylerini kanıt olarak kullanan, Safety 4.0 odaklı bir
+analizdir (v2, 16.11.2026; ilk sürüm 25.10.2026 yalnızca Lab 1–5'e dayanıyordu). PDF'in kaynak HTML'i
+[kaynak/RB-HRB_SWOT_Analizi.html](kaynak/RB-HRB_SWOT_Analizi.html) dosyasındadır:
 
 - **Yöntem:** Her madde föydeki bir soruya ya da kaynaklı bir dış olguya bağlı. Puan = Etki (1–3) × Olasılık (1–3).
   ⚠ işareti insana zarar potansiyelini gösterir ve kursun S=3 kuralı gereği puandan bağımsız olarak öncelikli kalır.
   Her güçlü yön için kanıt olgunluğu (Beyan → Doğrulanmış) belirtilir.
-- **Kapsam:** 47 madde (9 güçlü yön, 16 zayıf yön, 9 fırsat, 13 tehdit), 8 TOWS stratejisi, 16 adımlık 90 günlük yol
+- **Kapsam:** 49 madde (11 güçlü yön, 16 zayıf yön, 9 fırsat, 13 tehdit), 8 TOWS stratejisi, 16 adımlık 90 günlük yol
   haritası, Evidence Pack kanıt durumu.
-- **Sonuç:** Stratejik duruş **WT (savunma)**; iç eksen −1,83, dış eksen −0,64. Önce saldırı yüzeyi daraltılmalı ve
+- **Sonuç:** Stratejik duruş **WT (savunma)**; iç eksen −1,77, dış eksen −0,64. Önce saldırı yüzeyi daraltılmalı ve
   emniyet bağımsızlığı kanıtlanmalı, ardından mevzuat kaynaklı fırsatlara yönelinmeli.
 - **Öne çıkan bulgular:**
   - En kritik zincir: internete açık uzak izleme modülü + paylaşılan `admin/1234` hesabı + modülün emniyet PLC'si ile
@@ -71,7 +72,10 @@ analizdir:
     varken bariyerin yükselmesi tehlikenin kendisi.
   - Mevzuat takvimi: CRA bildirim yükümlülüğü 11 Eylül 2026'dan beri yürürlükte; Makine Tüzüğü 20 Ocak 2027'de
     uygulanmaya başlıyor.
-- **Ekler:** Föylerde bulunan 18 tutarsızlığın denetimi (Ek A) ve 27 kaynaklık kaynakça (Ek B).
+- **Lab 6–7 güncellemesi (v2):** iki yeni güçlü yön eklendi: olay müdahale akışı (S10) ve YZ fail-safe kararı (S11).
+    EP 13 "Taslak"a çıktı. Yeni bulgu: Lab 6'daki müdahale planı, bugün üretilmeyen oturum loglarına ve tanımsız
+    bir "bilinen-iyi" yedeğe dayanıyor. "Yukarıda kilitli" güvenli durum çelişkisi Lab 6–7'ye de taşınmış.
+- **Ekler:** Föylerde bulunan 23 tutarsızlığın denetimi (Ek A; A19–A23 Lab 6–7'den) ve 27 kaynaklık kaynakça (Ek B).
 
 ## Çerçeve ve standartlar
 

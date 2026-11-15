@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>RB-HRB SWOT Analizi</title>
+<style>
+@page {
+  size: A4;
+  margin: 13mm 13mm 15mm 13mm;
+  @bottom-left {
+    content: "SAFETY 4.0 BOOTCAMP · RB-HRB (SAMİB) Sürümü · SWOT Analizi v2 · Bu bir eğitim çıktısıdır, resmî denetim değildir.";
+    font-family: Verdana, "DejaVu Sans", sans-serif; font-size: 6.5pt; font-style: italic; color: #6b7280;
+  }
+  @bottom-right {
+    content: counter(page) " / " counter(pages);
+    font-family: Verdana, "DejaVu Sans", sans-serif; font-size: 6.5pt; color: #6b7280;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; font-family: Verdana, "DejaVu Sans", sans-serif; font-size: 7.4pt; line-height: 1.38; color: #111827; background: #fff; }
+p { margin: 0 0 4px; }
+.page { break-before: page; }
+.warn { color: #c2410c; }
+
+/* kapak */
+.cover { background: #0f1b2d; border-top: 5px solid #f5c451; color: #fff; padding: 14px 22px 14px; }
+.cover .brand { font-style: italic; color: #a9c7e8; font-size: 10pt; }
+.cover h1 { margin: 2px 0 0; font-size: 27pt; line-height: 1.1; }
+.cover .sub { font-style: italic; color: #c9d6e6; font-size: 10.5pt; margin-bottom: 8px; }
+.cover .machine { color: #f5c451; font-weight: bold; font-size: 14pt; margin-bottom: 4px; }
+.cover .desc { font-style: italic; color: #dbe4ef; font-size: 7.8pt; margin: 0; }
+.idrow { display: flex; gap: 18px; margin: 10px 0 10px; }
+.idrow div { display: flex; align-items: flex-end; gap: 6px; }
+.idrow div:nth-child(1) { flex: 1.4; } .idrow div:nth-child(2) { flex: 1; } .idrow div:nth-child(3) { flex: 1; }
+.idrow .lbl { color: #6b7280; font-size: 7pt; white-space: nowrap; }
+.idrow .val { flex: 1; border-bottom: 1px solid #6b7280; font-weight: bold; padding-bottom: 1px; }
+
+.box { border-radius: 2px; padding: 7px 10px; margin: 0 0 8px; break-inside: avoid; }
+.box h3 { margin: 0 0 3px; font-size: 7.8pt; }
+.box.alert { background: #fff1ec; border: 1px solid #f6c9b6; border-left: 4px solid #c2410c; }
+.box.alert h3 { color: #c2410c; }
+.box.summary { background: #eefaf1; border: 1px solid #9fdcb4; }
+.box.summary h3 { color: #14532d; }
+.box.summary ol { margin: 0; padding-left: 16px; color: #14532d; }
+.box.summary li { margin-bottom: 2px; }
+.box.method { background: #eef5fc; border: 1px solid #b9d3ec; }
+.box.method h3 { color: #0f1b2d; }
+.box.version { background: #f8fafc; border: 1px solid #cbd5e1; border-left: 4px solid #1f6391; }
+.box.version h3 { color: #1f6391; }
+.box.version ul { margin: 0; padding-left: 14px; }
+.box.version li { margin-bottom: 1px; }
+.box.note { background: #fdf7e7; border: 1px solid #f0dc9e; }
+
+.pill { display: inline-block; border-radius: 9px; padding: 0 6px; font-size: 6.6pt; font-weight: bold; border: 1px solid #cbd5e1; background: #f1f5f9; color: #334155; white-space: nowrap; line-height: 1.5; }
+.pill.taslak { background: #fdf0c2; border-color: #e9c46a; color: #7a5b00; }
+.pill.kb { background: #e0e7ff; border-color: #a5b4fc; color: #3730a3; }
+.pill.deg { background: #fff; border: 1px dashed #94a3b8; color: #475569; }
+.tag { display: inline-block; font-size: 5.6pt; font-weight: bold; text-transform: uppercase; letter-spacing: .3px; border-radius: 2px; padding: 0 3px; vertical-align: 1px; margin-left: 3px; line-height: 1.5; }
+.tag.new { background: #1f6391; color: #fff; }
+.tag.upd { border: 1px solid #1f6391; color: #1f6391; }
+
+/* bölüm başlıkları */
+.eyebrow { font-style: italic; color: #6b7280; font-size: 7.4pt; margin: 0; }
+h2 { font-size: 16pt; margin: 0 0 8px; padding-bottom: 3px; border-bottom: 2px solid #0f1b2d; }
+h4 { color: #1f6391; font-size: 9.5pt; margin: 10px 0 5px; }
+
+/* matris */
+.matrix { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+.quad { border: 1px solid; display: flex; flex-direction: column; }
+.quad .qh { color: #fff; display: flex; justify-content: space-between; align-items: baseline; padding: 5px 9px; }
+.quad .qh b { font-size: 10pt; }
+.quad .qh span { font-size: 6.6pt; opacity: .92; }
+.quad ul { list-style: none; margin: 0; padding: 4px 9px 6px; flex: 1; }
+.quad li { display: flex; gap: 6px; padding: 2.5px 0; border-bottom: 1px dashed rgba(0,0,0,.13); align-items: baseline; }
+.quad li .c { font-weight: bold; width: 26px; flex: none; }
+.quad li .t { flex: 1; }
+.quad li .s { font-weight: bold; width: 14px; text-align: right; flex: none; }
+.q-s { border-color: #a6d8b4; } .q-s .qh { background: #1e7b34; } .q-s ul { background: #f2faf4; } .q-s .c, .q-s .s { color: #1e7b34; }
+.q-w { border-color: #f0b4ae; } .q-w .qh { background: #b42318; } .q-w ul { background: #fdf3f2; } .q-w .c, .q-w .s { color: #b42318; }
+.q-o { border-color: #b2cde8; } .q-o .qh { background: #1f5f99; } .q-o ul { background: #eef4fb; } .q-o .c, .q-o .s { color: #1f5f99; }
+.q-t { border-color: #f3c99c; } .q-t .qh { background: #b54708; } .q-t ul { background: #fef6ec; } .q-t .c, .q-t .s { color: #b54708; }
+.fineprint { font-size: 6.6pt; color: #4b5563; margin-top: 7px; }
+
+/* tablolar */
+table { width: 100%; border-collapse: collapse; }
+thead { display: table-header-group; }
+tr { break-inside: avoid; }
+th { background: #0f1b2d; color: #fff; text-align: left; font-size: 7pt; padding: 4px 5px; vertical-align: bottom; }
+td { border-bottom: 1px solid #d6dde6; padding: 4px 5px; vertical-align: top; }
+.detail td { font-size: 6.8pt; line-height: 1.3; padding: 3px 5px; }
+h2 { break-after: avoid; }
+.flow { margin-top: 16px; }
+td.num { text-align: center; }
+td.score { text-align: center; font-weight: bold; font-size: 9pt; }
+.detail td:nth-child(3) { font-size: 6.2pt; color: #374151; }
+.detail .code { font-weight: bold; white-space: nowrap; }
+.detail .ttl { font-weight: bold; display: block; }
+.detail tr.grp td { background: #e8edf3; font-weight: bold; font-size: 7pt; padding: 3px 5px; }
+.d-s .code, .d-s .score { color: #1e7b34; }
+.d-w .code, .d-w .score { color: #b42318; }
+.d-o .code, .d-o .score { color: #1f5f99; }
+.d-t .code, .d-t .score { color: #b54708; }
+.detail { border: 1px solid #d6dde6; }
+
+/* strateji */
+.posture { display: grid; grid-template-columns: 1.15fr 1fr; gap: 16px; align-items: start; }
+.posture table td, .posture table th { font-size: 7.2pt; }
+.tows { border: 1px solid #d6dde6; }
+.tows th.colh { color: #fff; font-size: 7.6pt; }
+.tows th.rowh { color: #fff; width: 15%; text-align: center; vertical-align: middle; font-size: 8pt; }
+.tows td { width: 42.5%; border: 1px solid #d6dde6; background: #f8fafc; font-size: 6.9pt; }
+.tows td p { margin-bottom: 6px; }
+.tows .bag { color: #6b7280; display: block; }
+
+/* yol haritası, EP, Ek A */
+.road td, .road th { font-size: 6.4pt; padding: 2.5px 4px; line-height: 1.28; }
+.road td.per { font-weight: bold; background: #f1f5f9; }
+.ep td, .ep th { font-size: 6.4pt; padding: 2.5px 4px; line-height: 1.28; }
+.st-taslak { color: #b42318; font-weight: bold; }
+.st-yok { color: #b42318; font-weight: bold; }
+.eka td, .eka th { font-size: 6.4pt; padding: 3px 4px; line-height: 1.3; }
+.eka td:first-child { font-weight: bold; }
+.sev-y { color: #b42318; font-weight: bold; }
+.sev-o { color: #c2410c; font-weight: bold; }
+.sev-d { color: #6b7280; font-weight: bold; }
+.sev-k { color: #1e7b34; font-weight: bold; }
+.eka tr.v2 td { background: #f3f8fd; }
+
+/* kaynakça */
+.refs h4 { font-size: 8pt; margin: 8px 0 3px; }
+.refs ol { margin: 0; padding-left: 18px; font-size: 6.6pt; }
+.refs li { margin-bottom: 2px; word-break: break-word; }
+</style>
+</head>
+<body>
+
+<!-- ============ SAYFA 1 · KAPAK ============ -->
+<header class="cover">
+  <div class="brand">INSPECCO × KRIPTARIUM</div>
+  <h1>SWOT Analizi</h1>
+  <div class="sub">Safety 4.0 Bootcamp · RB-HRB (SAMİB) Sürümü</div>
+  <div class="machine">Hidrolik Yol Bloklayıcı — Arma Kontrol</div>
+  <p class="desc">Bakış açısı: Safety 4.0 — emniyet × siber güvenlik × mevzuat uyumu. Kanıt tabanı: Lab 1–7 föyleri (Lab 1–5 v3-3, Lab 6–7) ve kaynaklı dış olgular (Ek B). Makine: hidrolik piston · yükselen bariyer kolu · alan tarayıcı · araç algılama döngüsü · emniyet PLC'si · kontrol ünitesi · uzak izleme modülü.</p>
+</header>
+
+<div class="idrow">
+  <div><span class="lbl">Ad Soyad</span><span class="val">Fatma Nur Karagöz — 230541018</span></div>
+  <div><span class="lbl">Grup</span><span class="val">Gündüz 4-B</span></div>
+  <div><span class="lbl">Tarih</span><span class="val">16.11.2026 · v2</span></div>
+</div>
+
+<div class="box alert">
+  <h3>⚠︎ Okuma uyarısı</h3>
+  <p>Bu analiz bir eğitim çıktısıdır; resmî denetim, uygunluk değerlendirmesi veya belgelendirme değildir ve CE/mevzuat uygunluğu garantisi vermez. İç faktörler — özellikle <b>Zayıf Yönler</b> — Safety 4.0 Bootcamp föylerinde tanımlanan <b>senaryo konfigürasyonuna</b> dayanır (ör. “admin/1234” hesabı, Windows CE 6.0, OpenVPN 2.4.5, internete açık uzak izleme modülü). Bunlar eğitim senaryosunun varsayımlarıdır; <b>Arma Kontrol'ün piyasadaki ürünlerine ilişkin doğrulanmış tespitler değildir.</b> Üreticiye dair bilgiler yalnızca kamuya açık kaynaklardan alınmıştır (Ek B).</p>
+</div>
+
+<div class="box summary">
+  <h3>Yönetici özeti</h3>
+  <ol>
+    <li><b>Stratejik duruş: WT (savunma), WO sınırına yakın.</b> Kadran ortalamaları iç tarafta −1,77, dış tarafta −0,64 veriyor; Lab 6–7 eklemeleri duruşu değiştirmedi. Önce saldırı yüzeyi daraltılmalı ve emniyet bağımsızlığı kanıtlanmalı; ardından mevzuat kaynaklı fırsatlara (WO) yönelinmeli.</li>
+    <li><b>En kritik zincir:</b> internete açık uzak modül (W1) + paylaşılan “admin/1234” (W2) + modülün Emniyet PLC ile aynı segmentte olması (W4). Kursun “dijital kesişim noktası” tam burada açık; internetteki otomatik taramalar (T1; emsal: 2023 Unitronics saldırıları) için hazır bir hedef. Lab 6'daki olay senaryosu (gece 03:00'te “admin/1234” ile giriş) bu zincirin gerçekleşmiş hâli.</li>
+    <li><b>En değerli güç:</b> ayrık, kablolu emniyet yolu ve SIL 2 emniyet PLC'si (S1–S2). Ancak bugün “Beyan” seviyesinde; doğrulanmış kayda dönüşmedikçe denetimde güç sayılmaz.</li>
+    <li><b>Tasarım düzeyinde çatışma:</b> güvenli durum “bariyer kolu YUKARI kilitli” olarak tanımlanmış. Bu bir güvenlik (security) hedefidir; emniyet açısından algılama varken yükselmek tehlikenin kendisidir (W7). Çelişki Lab 6 ve Lab 7'ye de taşınmış (A21). Bağlama duyarlı bir güvenli durum matrisi gerekiyor.</li>
+    <li><b>Mevzuat saati işliyor:</b> CRA bildirim yükümlülüğü 11 Eylül 2026'dan beri mevcut ürünler için de yürürlükte; Makine Tüzüğü 20 Ocak 2027'de geçiş dönemi olmadan uygulanacak. Oturum kaydı olmayan bir ürün (W3) 24 s / 72 s bildirimi için gereken bilgiyi üretemez.</li>
+    <li><b>Lab 6–7'nin katkısı:</b> iki yeni güç eklendi: olay müdahale akışı (S10) ve YZ için fail-safe karar çerçevesi (S11). Ancak Lab 6'daki akış, bugün üretilmeyen oturum loglarına ve tanımlanmamış bir “bilinen-iyi” yedeğe dayanıyor (W3, A19–A20); kanıt altyapısı kurulmadan plan uygulanamaz.</li>
+    <li><b>Kanıt olgunluğu:</b> bu analizin değerlendirmesine göre Evidence Pack'in 15 başlığından hiçbiri “Var” seviyesinde değil; Lab 6 ile EP 13 “Taslak”a çıktı: 10'u “Taslak”, 5'i “Yok”.</li>
+  </ol>
+</div>
+
+<div class="box method">
+  <h3>Yöntem</h3>
+  <p><b>Sınır:</b> İç (S/W) = makine, föydeki senaryo konfigürasyonu ve ekibin ürettiği belgeler. Dış (O/T) = tehdit ortamı, mevzuat ve standartlar, pazar, teknoloji. <b>Puan</b> = Etki (1–3) × Olasılık/Gerçekleşebilirlik (1–3) → 1–9; kursun L×S×E mantığıyla aynı aileden. <span class="warn">⚠︎</span> = insana zarar potansiyeli; kursun <i>S=3 kuralı</i> gereği puanı ne olursa olsun öncelik listesinde kalır. <b>Kanıt olgunluğu</b> kursun kanıt hiyerarşisini izler: <span class="pill">Beyan</span> &lt; Prosedür &lt; Kayıt &lt; Doğrulanmış; ek olarak <span class="pill taslak">Taslak</span> (yazılı ama uygulanmamış), <span class="pill kb">KB</span> (kamuya açık beyan) ve <span class="pill deg">Değ.</span> (kaynaksız değerlendirme). Maddeler föylerin iki bağımsız okumasının karşılaştırılmasıyla çıkarıldı; bulunan çelişkiler Ek A'dadır. Kanıt sütunundaki <i>LabN · …</i> föye, <i>[n]</i> Ek B'deki kaynaklara işaret eder.</p>
+</div>
+
+<div class="box version">
+  <h3>Sürüm notu — v2 (16.11.2026)</h3>
+  <ul>
+    <li>Kanıt tabanı Lab 6 (CRA Incident Simulation) ve Lab 7 (AI Safety Challenge) föyleriyle (06.11.2026) Lab 1–7'ye genişletildi. İlk sürüm (25.10.2026) bu iki labı “henüz yapılmadı” diye ileriye dönük ele alıyordu.</li>
+    <li><b>Yeni maddeler:</b> S10 olay müdahale akışı, S11 YZ fail-safe kararı. Mevcut maddelerin hiçbirinin puanı değişmedi.</li>
+    <li><b>Metni güncellenen maddeler</b> <span class="tag upd">güncellendi</span>: S1, S3, S6 · W3, W5, W6, W7, W15 · O9 · T4, T8, T12 · TOWS SO1, ST2 · yol haritası #4, #5, #6, #10, #11.</li>
+    <li><b>Evidence Pack:</b> EP 13 Incident Response “Yok” → “Taslak”. <b>Ek A:</b> beş yeni bulgu (A19–A23), A14 kapsamı genişledi, A18 föyde düzeltildi.</li>
+    <li><b>Sonuç:</b> iç eksen −1,83 → −1,77; stratejik duruş değişmedi (WT).</li>
+  </ul>
+</div>
+
+<!-- ============ SWOT MATRİSİ ============ -->
+<section class="page">
+  <p class="eyebrow">SWOT ANALİZİ · RB-HRB (SAMİB) · Hidrolik Yol Bloklayıcı</p>
+  <h2>SWOT Matrisi</h2>
+  <h4 style="margin-top:4px">Tüm maddeler — kadran içinde puana göre sıralı</h4>
+  <div class="matrix">
+    <div class="quad q-s">
+      <div class="qh"><b>Güçlü Yönler (S)</b><span>iç · olumlu · ort. 4,73</span></div>
+      <ul>
+        <li><span class="c">S1</span><span class="t"><span class="warn">⚠︎</span> Ayrık, kablolu emniyet yolu</span><span class="s">6</span></li>
+        <li><span class="c">S2</span><span class="t"><span class="warn">⚠︎</span> SIL 2 emniyet PLC'si</span><span class="s">6</span></li>
+        <li><span class="c">S5</span><span class="t">Hedef güvenli mimari + bağımsızlık gereksinimi</span><span class="s">6</span></li>
+        <li><span class="c">S6</span><span class="t">Başlangıç kanıt dokümantasyonu</span><span class="s">6</span></li>
+        <li><span class="c">S10</span><span class="t"><span class="warn">⚠︎</span> Olay müdahale akışı ve kanıt koruma <span class="tag new">yeni</span></span><span class="s">6</span></li>
+        <li><span class="c">S3</span><span class="t">Çok kaynaklı algılama potansiyeli</span><span class="s">4</span></li>
+        <li><span class="c">S4</span><span class="t">Uzak izleme kanalı</span><span class="s">4</span></li>
+        <li><span class="c">S7</span><span class="t">Üreticinin HVM ve ihracat yetkinliği</span><span class="s">4</span></li>
+        <li><span class="c">S9</span><span class="t">“Şüphede kapalı” güvenlik duruşu</span><span class="s">4</span></li>
+        <li><span class="c">S11</span><span class="t"><span class="warn">⚠︎</span> YZ için fail-safe karar çerçevesi <span class="tag new">yeni</span></span><span class="s">4</span></li>
+        <li><span class="c">S8</span><span class="t">İmzalı firmware olasılığı</span><span class="s">2</span></li>
+      </ul>
+    </div>
+    <div class="quad q-w">
+      <div class="qh"><b>Zayıf Yönler (W)</b><span>iç · olumsuz · ort. 6,50</span></div>
+      <ul>
+        <li><span class="c">W1</span><span class="t"><span class="warn">⚠︎</span> İnternete açık uzak modül</span><span class="s">9</span></li>
+        <li><span class="c">W2</span><span class="t"><span class="warn">⚠︎</span> Paylaşılan “admin/1234” hesabı</span><span class="s">9</span></li>
+        <li><span class="c">W3</span><span class="t">Oturum kaydı yok</span><span class="s">9</span></li>
+        <li><span class="c">W4</span><span class="t"><span class="warn">⚠︎</span> Uzak modül, Emniyet PLC ile aynı segmentte</span><span class="s">9</span></li>
+        <li><span class="c">W5</span><span class="t"><span class="warn">⚠︎</span> Emniyet bağımsızlığı kısmi ve belirsiz</span><span class="s">6</span></li>
+        <li><span class="c">W6</span><span class="t">Zone modeli kurs ilkesine aykırı</span><span class="s">6</span></li>
+        <li><span class="c">W7</span><span class="t"><span class="warn">⚠︎</span> Güvenli durum bağlamsız ve çelişkili</span><span class="s">6</span></li>
+        <li><span class="c">W8</span><span class="t"><span class="warn">⚠︎</span> Zayıf varlık algılama zinciri</span><span class="s">6</span></li>
+        <li><span class="c">W9</span><span class="t"><span class="warn">⚠︎</span> PLr/SIL gerekçesiz, doğrulanmamış</span><span class="s">6</span></li>
+        <li><span class="c">W10</span><span class="t">Desteği bitmiş (EOL) bileşenler</span><span class="s">6</span></li>
+        <li><span class="c">W11</span><span class="t">Eksik SBOM; VEX ve CVD politikası yok</span><span class="s">6</span></li>
+        <li><span class="c">W12</span><span class="t">CVE ve yama kararlarında yöntem hataları</span><span class="s">6</span></li>
+        <li><span class="c">W13</span><span class="t"><span class="warn">⚠︎</span> Korumasız yerel arayüzler (USB, HMI, port)</span><span class="s">6</span></li>
+        <li><span class="c">W15</span><span class="t">Belgeler arası çelişkiler, düşük olgunluk</span><span class="s">6</span></li>
+        <li><span class="c">W14</span><span class="t">Risk kaydında kapsam ve kalibrasyon</span><span class="s">4</span></li>
+        <li><span class="c">W16</span><span class="t">ANPR için veri koruma tasarımı yok</span><span class="s">4</span></li>
+      </ul>
+    </div>
+    <div class="quad q-o">
+      <div class="qh"><b>Fırsatlar (O)</b><span>dış · olumlu · ort. 4,67</span></div>
+      <ul>
+        <li><span class="c">O1</span><span class="t">Makine Tüzüğü 2023/1230 ile erken uyum</span><span class="s">6</span></li>
+        <li><span class="c">O2</span><span class="t">CRA'ya hazır ürün sürümü</span><span class="s">6</span></li>
+        <li><span class="c">O3</span><span class="t">Köprü standartlar ve hazır çerçeveler</span><span class="s">6</span></li>
+        <li><span class="c">O4</span><span class="t">Olgun, erişilebilir güvenlik teknolojileri</span><span class="s">6</span></li>
+        <li><span class="c">O5</span><span class="t">Dış ortam sertifikalı emniyet sensörleri</span><span class="s">4</span></li>
+        <li><span class="c">O6</span><span class="t">NIS2 ve 7545: güvenli tedarikçiye talep</span><span class="s">4</span></li>
+        <li><span class="c">O7</span><span class="t">Retrofit paketi ve servis geliri</span><span class="s">4</span></li>
+        <li><span class="c">O8</span><span class="t">HVM talebi ve ISO 22343-1:2023 geçişi</span><span class="s">4</span></li>
+        <li><span class="c">O9</span><span class="t">YZ destekli ek algılama katmanı</span><span class="s">2</span></li>
+      </ul>
+    </div>
+    <div class="quad q-t">
+      <div class="qh"><b>Tehditler (T)</b><span>dış · olumsuz · ort. 5,31</span></div>
+      <ul>
+        <li><span class="c">T1</span><span class="t"><span class="warn">⚠︎</span> Otomatik tarama + varsayılan parola</span><span class="s">9</span></li>
+        <li><span class="c">T2</span><span class="t"><span class="warn">⚠︎</span> Hedefli siber-fiziksel saldırı</span><span class="s">6</span></li>
+        <li><span class="c">T3</span><span class="t"><span class="warn">⚠︎</span> Tedarik zinciri</span><span class="s">6</span></li>
+        <li><span class="c">T4</span><span class="t">Bildirim yükümlülükleri ve yaptırımlar (CRA, 7545)</span><span class="s">6</span></li>
+        <li><span class="c">T5</span><span class="t">Makine Tüzüğü sonrası CE riski</span><span class="s">6</span></li>
+        <li><span class="c">T7</span><span class="t"><span class="warn">⚠︎</span> Kaza, sorumluluk, regülatör incelemesi</span><span class="s">6</span></li>
+        <li><span class="c">T8</span><span class="t"><span class="warn">⚠︎</span> Fidye yazılımı, acil durum erişimi</span><span class="s">6</span></li>
+        <li><span class="c">T10</span><span class="t">EOL platformlarda biriken zafiyetler</span><span class="s">6</span></li>
+        <li><span class="c">T6</span><span class="t">Yeni Ürün Sorumluluğu Direktifi</span><span class="s">4</span></li>
+        <li><span class="c">T9</span><span class="t">KVKK / GDPR yaptırımları</span><span class="s">4</span></li>
+        <li><span class="c">T11</span><span class="t">Rekabet</span><span class="s">4</span></li>
+        <li><span class="c">T13</span><span class="t">Nitelikli personel kıtlığı</span><span class="s">4</span></li>
+        <li><span class="c">T12</span><span class="t">YZ'nin emniyete girmesiyle MR Ek I-A yükü</span><span class="s">2</span></li>
+      </ul>
+    </div>
+  </div>
+  <p class="fineprint">Puan = Etki × Olasılık/Gerçekleşebilirlik (1–9) · <span class="warn">⚠︎</span> insana zarar potansiyeli (S=3 kuralı) · madde sayısı: S 11 · W 16 · O 9 · T 13 · <span class="warn">⚠︎</span> sayısı: S 4 · W 8 · T 5. Kod numaraları tema sırasını izler; matriste puana göre sıralanmıştır. <span class="tag new">yeni</span> = v2'de Lab 6–7 ile eklendi.</p>
+</section>
+
+<!-- ============ GÜÇLÜ YÖNLER ============ -->
+<section class="page">
+  <p class="eyebrow">SWOT ANALİZİ · Ayrıntı</p>
+  <h2>Güçlü Yönler (S)</h2>
+  <table class="detail d-s">
+    <colgroup><col style="width:7%"><col style="width:57%"><col style="width:13%"><col style="width:9%"><col style="width:4%"><col style="width:4%"><col style="width:6%"></colgroup>
+    <thead><tr><th>Kod</th><th>Madde ve gerekçe</th><th>Kanıt</th><th>Olgunluk</th><th>E</th><th>O</th><th>Puan</th></tr></thead>
+    <tbody>
+      <tr><td class="code"><span class="warn">⚠︎</span> S1</td><td><span class="ttl">Ayrık ve kablolu emniyet yolu <span class="tag upd">güncellendi</span></span>Alan tarayıcı / E-stop / bariyer sensörü → Emniyet PLC → hidrolik vana kesme zinciri, normal kontrol yolundan (Kontrol PLC → pompa) fiziksel ve lojik olarak ayrı tanımlanmış. Lab 4'e göre tetik sinyali “sensör kabloları + emniyet rölesi” üzerinden ağdan bağımsız çalışıyor. Bu, kursun “en güçlü tek yatırım” dediği emniyet bağımsızlığının temeli. Lab 7 de YZ yolunu bu zincirin dışında tutuyor. Sınır: bağlantı türü Lab 2'deki C1 ile çelişiyor (W5).</td><td>Lab1 · şema, S3–S4; Lab4 · B1; Lab7 · şema; [2]</td><td><span class="pill">Beyan</span></td><td class="num">3</td><td class="num">2</td><td class="score">6</td></tr>
+      <tr><td class="code"><span class="warn">⚠︎</span> S2</td><td><span class="ttl">SIL 2 emniyet PLC'si</span>Çift kanallı, kendini test eden ve Kontrol PLC arızalansa da güvenli durumu koruyan emniyet kontrolörü. Firmware güncellemesi yalnızca tedarikçi onaylı prosedürle ve bağımsız doğrulama testiyle yapılıyor. Sınır: bileşen sertifikası, emniyet fonksiyonunun PL d / SIL 2 sağladığını tek başına göstermez (W9).</td><td>Lab1 · S4–S5; Lab5 · SBOM, Görev C</td><td><span class="pill">Beyan</span></td><td class="num">3</td><td class="num">2</td><td class="score">6</td></tr>
+      <tr><td class="code">S5</td><td><span class="ttl">Hedef güvenli mimari ve emniyet bağımsızlığı gereksinimi yazılı</span>DMZ'de jump server, VPN, MFA, kişisel hesap, tam oturum kaydı (SIEM), varsayılan kapalı erişim, ayrı segment ve tek yönlü veri diyotu tanımlanmış. Ayrıca iki gereksinim yazılmış: emniyet zinciri “ağ bağlantısı (SAMİB modülü, Kontrol PLC ağı) tamamen kesilse dahi işlevini sürdürebilmelidir” ve “Emniyet PLC konfigürasyon değişikliği yalnızca fiziksel erişim gerektiren donanım kilidi veya yerel port üzerinden yapılabilmelidir”. İkincisi doğrudan Makine Tüzüğü EHSR 1.1.9 / 1.2.1 ile örtüşüyor.</td><td>Lab2 · Görev B; Lab4 · A, B2; [11]</td><td><span class="pill taslak">Taslak</span></td><td class="num">3</td><td class="num">2</td><td class="score">6</td></tr>
+      <tr><td class="code">S6</td><td><span class="ttl">Başlangıç seviyesinde kanıt dokümantasyonu <span class="tag upd">güncellendi</span></span>6 kalemli SBOM, L×S×E ile puanlanmış 3 senaryolu risk kaydı, yama karar matrisi ve telafi edici kontroller mevcut. Risk kaydında S=3 kuralı doğru uygulanmış (S3 düşük skora rağmen eylem planında). Çıktılar Evidence Pack başlıklarına eşlenmiş; Lab 6 ile EP 13 (olay müdahalesi) de iskelet kazandı. Bu, CRA'nın SBOM, zafiyet yönetimi ve bildirim yükümlülükleri için hazır bir iskelet.</td><td>Lab3; Lab5 · A–C; Lab6</td><td><span class="pill taslak">Taslak</span></td><td class="num">2</td><td class="num">3</td><td class="score">6</td></tr>
+      <tr><td class="code"><span class="warn">⚠︎</span> S10</td><td><span class="ttl">Olay müdahale akışı ve kanıt koruma refleksi yazılı <span class="tag new">yeni</span></span>İlk 15 dk → 2 saat → 24 s / 72 s / 14 gün kilometre taşlarıyla bir akış ve rol dağılımı (OT sorumlusu, IT/SOC, Arma Kontrol, Yönetim) tanımlanmış. Doğru refleksler var: uzak modülün bağlantısı fiziksel olarak kesiliyor ama cihaz kapatılmıyor ya da resetlenmiyor; emniyet konfigürasyonu yerel porttan okunup bilinen-iyi sürümle hash karşılaştırması yapılıyor; doğrulanana kadar otomatik mod kapalı; kanıtlar hash ve zaman damgasıyla, yazma korumalı ortamda saklanıyor. İşletmeci–üretici rol ayrımı CRA'ya uygun: bildirimi üretici yürütür, işletmeci bilgi ve kanıt sağlar. Sınır: akış hiç tatbik edilmedi ve bugün olmayan kanıt kaynaklarına dayanıyor (W3, A19–A20).</td><td>Lab6 · 1–5; [9] [10]</td><td><span class="pill taslak">Taslak</span></td><td class="num">3</td><td class="num">2</td><td class="score">6</td></tr>
+      <tr><td class="code">S3</td><td><span class="ttl">Çok kaynaklı algılama potansiyeli <span class="tag upd">güncellendi</span></span>Optik alan tarayıcı, endüktif araç algılama döngüsü, bariyer sensörü ve E-stop farklı fiziksel prensiplerle çalışıyor. Doğru bağlanırsa ortak nedenli arızaya karşı çeşitlilik (diversity) sağlar. Bugün loop dedektör emniyet zincirinde değil (W8). Lab 7, YZ girdisinin loop dedektör ve bariyer sensörüyle çapraz doğrulanmasını öneriyor; çeşitlilik ilk kez bir föyde kullanılıyor, ancak emniyet zincirinin dışında.</td><td>Lab1 · şema; Lab2 · Zone 1; Lab7 · 2</td><td><span class="pill">Beyan</span></td><td class="num">2</td><td class="num">2</td><td class="score">4</td></tr>
+      <tr><td class="code">S4</td><td><span class="ttl">Uzak izleme kanalı mevcut</span>Durum görünürlüğü, uzaktan teşhis ve kestirimci bakım için hazır bir altyapı; güvenli hale getirildiğinde servis değeri üretir (O7). Aynı modül bugün en büyük saldırı yüzeyi (W1–W4).</td><td>Föy kapağı; Lab4 · Mevcut</td><td><span class="pill">Beyan</span></td><td class="num">2</td><td class="num">2</td><td class="score">4</td></tr>
+      <tr><td class="code">S7</td><td><span class="ttl">Üreticinin HVM ve ihracat yetkinliği</span>Arma Kontrol 2006'da kuruldu; havalimanı, enerji tesisi ve kamu binaları için hidrolik road blocker ve terör karşıtı bariyer üretiyor. 60'tan fazla [6] / 65'ten fazla [7] ülkeye ihracat yapıyor. Arma markalı teleskopik road blocker RB-ATTRB-105 için IWA 14-1:2013 V/7500[N3C]/80/90:0 test sınıfı belirtiliyor (distribütör sayfası) [8]. RB-HRB'nin kendi sınıfı doğrulanmalı.</td><td>[6] [7] [8]</td><td><span class="pill kb">KB</span></td><td class="num">2</td><td class="num">2</td><td class="score">4</td></tr>
+      <tr><td class="code">S9</td><td><span class="ttl">“Şüphede kapalı” (fail-secure) güvenlik duruşu</span>Arıza ya da tehdit durumunda bariyerin yukarıda kilitli kalması yetkisiz araç geçişini engeller; güvenlik (security) görevi açısından doğru refleks. Emniyetle çatışması W7'de ele alınıyor.</td><td>Lab1 · S6</td><td><span class="pill">Beyan</span></td><td class="num">2</td><td class="num">2</td><td class="score">4</td></tr>
+      <tr><td class="code"><span class="warn">⚠︎</span> S11</td><td><span class="ttl">YZ için “Prediction ≠ Safety” karar çerçevesi <span class="tag new">yeni</span></span>Planlanan insan/araç sınıflandırıcısı yalnızca öneri veriyor; kapatma yönünde karar yetkisi yok. Üç başarısızlık (yanlış sınıflandırma, manipüle girdi, düşük güven) için güvenli davranış tanımlı: YZ'siz emniyet tarayıcısı ve Emniyet PLC bağımsız çalışır; şüpheli girdi ikincil sensörlerle çapraz doğrulanır; başlangıç güven eşiği 0,90, “insan” sınıfındaki kaçırma oranına göre kalibre edilir; eşik altında görevliye sorulur ve YZ'siz moda dönülür. Bu çerçeve YZ'yi Makine Tüzüğü Ek I Kısım A kapsamının dışında tutar (T12). Sınır: özellik planlama aşamasında; YZ bileşeninin ağ bölgesi ve veri yolu tanımsız (W6).</td><td>Lab7 · 1–3, karar tablosu; [12]</td><td><span class="pill taslak">Taslak</span></td><td class="num">2</td><td class="num">2</td><td class="score">4</td></tr>
+      <tr><td class="code">S8</td><td><span class="ttl">İmzalı firmware olasılığı</span>Lab 5, uzak izleme modülü firmware'inin üretici tarafından imzalanmış olabileceğini ve üçüncü taraf yamanın çalışmayacağını belirtiyor. Doğrulanırsa yetkisiz firmware yüklemesine (T3) karşı önemli bir kontrol olur; bugün bir varsayım.</td><td>Lab5 · B2 (“olabilir”)</td><td><span class="pill">Beyan</span></td><td class="num">2</td><td class="num">1</td><td class="score">2</td></tr>
+    </tbody>
+  </table>
+  <div class="box note" style="margin-top:8px"><b>Okuma notu:</b> On bir güçlü yönden yalnızca biri (S7) dış kaynakla destekleniyor; geri kalanı “Beyan” ya da “Taslak” düzeyinde. Kursun kanıt hiyerarşisinde bunlar denetçinin en zayıf saydığı basamaklar. S1 ve S2'nin “Doğrulanmış kayıt” seviyesine çıkarılması, tüm analizin en yüksek kaldıraçlı adımıdır (bkz. SO1). Lab 6–7 ile eklenen S10 ve S11 de yazılı karar düzeyinde; tatbikat ve test kaydıyla desteklenmeleri gerekiyor.</div>
+</section>
+
+<!-- ============ ZAYIF YÖNLER ============ -->
+<section class="flow">
+  <p class="eyebrow">SWOT ANALİZİ · Ayrıntı</p>
+  <h2>Zayıf Yönler (W)</h2>
+  <div class="box alert" style="padding:5px 9px"><b class="warn">⚠︎ Hatırlatma:</b> Bu bölümdeki teknik bulgular föydeki eğitim senaryosunun varsayımlarıdır; üreticinin piyasadaki ürününe dair doğrulanmış tespit değildir.</div>
+  <table class="detail d-w">
+    <colgroup><col style="width:7%"><col style="width:57%"><col style="width:13%"><col style="width:9%"><col style="width:4%"><col style="width:4%"><col style="width:6%"></colgroup>
+    <thead><tr><th>Kod</th><th>Madde ve gerekçe</th><th>Kanıt</th><th>Olgunluk</th><th>E</th><th>O</th><th>Puan</th></tr></thead>
+    <tbody>
+      <tr class="grp"><td colspan="7">A · Uzak erişim ve kimlik</td></tr>
+      <tr><td class="code"><span class="warn">⚠︎</span> W1</td><td><span class="ttl">İnternete doğrudan açık uzak izleme modülü</span>Statik IP, port 443, 7/24 açık; jump server ve VPN yok. Föy tünelsiz bağlantının sorununu “açık bağlantıda trafik dinlenebilir” diye açıklıyor; oysa HTTPS şifrelidir. Asıl zafiyet, internete açık bir yönetim arayüzü ile zayıf kimlik doğrulamanın birleşmesi.</td><td>Lab4 · Mevcut; Lab5 · SBOM; Lab2 · B</td><td><span class="pill">Beyan</span></td><td class="num">3</td><td class="num">3</td><td class="score">9</td></tr>
+      <tr><td class="code"><span class="warn">⚠︎</span> W2</td><td><span class="ttl">Paylaşılan varsayılan hesap “admin/1234”</span>Kişisel hesap ve MFA yok; kim ne yaptı izlenemiyor. CRA Ek I Kısım I (2)(b) “varsayılan olarak güvenli yapılandırma” ve (2)(d) “yetkisiz erişime karşı koruma” gereksinimleriyle doğrudan çelişiyor.</td><td>Lab2 · A; Lab3 · S1; Lab4 · Mevcut; Lab6 · senaryo; [9]</td><td><span class="pill">Beyan</span></td><td class="num">3</td><td class="num">3</td><td class="score">9</td></tr>
+      <tr><td class="code">W3</td><td><span class="ttl">Oturum kaydı ve denetim izi yok <span class="tag upd">güncellendi</span></span>Adli analiz yapılamaz. CRA Ek I Kısım I (2)(l) “iç faaliyetin kaydı ve izlenmesi”, Makine Tüzüğü 1.1.9 “müdahale kanıtı” ve 24 s / 72 s bildirimleri için gereken bilgi üretilemez. Lab 6'daki müdahale akışı “SAMİB oturum ve kimlik doğrulama logları” ile “VPN logları”nın korunmasını istiyor; Lab 4'e göre bu kayıtlar bugün üretilmiyor. Plan, kayıt altyapısı kurulmadan uygulanamaz (A19).</td><td>Lab4 · Mevcut; Lab6 · 2, 5; [9] [11]</td><td><span class="pill">Beyan</span></td><td class="num">3</td><td class="num">3</td><td class="score">9</td></tr>
+      <tr class="grp"><td colspan="7">B · Mimari ve emniyet bağımsızlığı</td></tr>
+      <tr><td class="code"><span class="warn">⚠︎</span> W4</td><td><span class="ttl">Uzak modül ile Emniyet PLC aynı ağ segmentinde</span>Ele geçirilen modül üzerinden emniyet konfigürasyonu (ör. algılama eşiği) değiştirilebilir. Risk kaydındaki en yüksek senaryo (S1, skor 18) bu zayıflığa dayanıyor; kursun “dijital kesişim noktası” açık.</td><td>Lab1 · S7–S8; Lab3 · S1; Lab4 · Mevcut, B1</td><td><span class="pill">Beyan</span></td><td class="num">3</td><td class="num">3</td><td class="score">9</td></tr>
+      <tr><td class="code"><span class="warn">⚠︎</span> W5</td><td><span class="ttl">Emniyet bağımsızlığı kısmi ve belirsiz <span class="tag upd">güncellendi</span></span>Tetik sinyali kablolu deniyor (Lab 4), ama Lab 2 saha–kontrol arasına “sensör protokolleri”ne izin veren bir firewall (C1) koyuyor; bağlantı türü (OSSD mi, emniyet protokolü mü) netleşmeli. Konfigürasyon yolu ağda. Emniyet PLC için RUN-modu kilidi, parola, emniyet imzası (CRC) izleme ve değişiklik kaydı tanımlı değil. Lab 6, emniyet konfigürasyonunun “bilinen-iyi” yedekle hash karşılaştırmasını öngörüyor; ama referans yedek ve imza hiçbir föyde tanımlı değil (A20).</td><td>Lab2 · S3; Lab4 · B1–B2; Lab5 · SBOM; Lab6 · 2</td><td><span class="pill">Beyan</span></td><td class="num">3</td><td class="num">2</td><td class="score">6</td></tr>
+      <tr><td class="code">W6</td><td><span class="ttl">Zone/conduit modeli kursun ilkesine aykırı <span class="tag upd">güncellendi</span></span>Emniyet PLC, bina ağından erişilebilen EOL HMI ile aynı bölgede; oysa kurs sözlüğü “Safety sistemleri en korunan bölgede olmalı” diyor. IP tabanlı ANPR emniyet sensörleriyle aynı saha bölgesinde; hedef güvenlik seviyesi (SL-T) atanmamış. Koruma odası PC'si Zone 3'te ve C2 tek yönlü diyot olduğu için görevli bariyere komut veremez. Bina ağı → HMI ve ANPR → arka ofis geçişleri (conduit) tanımsız. Lab 7'de planlanan YZ sınıflandırıcısının hangi bölgede çalışacağı ve tarayıcı verisini hangi geçişten alacağı da tanımsız.</td><td>Lab2 · S1–S3; Lab7 · şema; [2] [3]</td><td><span class="pill">Beyan</span></td><td class="num">2</td><td class="num">3</td><td class="score">6</td></tr>
+      <tr class="grp"><td colspan="7">C · Emniyet konsepti</td></tr>
+      <tr><td class="code"><span class="warn">⚠︎</span> W7</td><td><span class="ttl">Güvenli durum bağlamsız ve çelişkili <span class="tag upd">güncellendi</span></span>Emniyet fonksiyonu “bariyer kolunu hareketsiz bırakmak ve kilitli yüksek konumda tutmaktır” diye tanımlanmış; iki ayrı hedef tek cümlede birleşmiş. Bariyer aşağıdayken ya da hareket halindeyken algılama olursa yukarı çıkmak tehlikeli hareketin kendisidir. Hidrolik enerjinin kesilmesi hareketi durdurur; ama kolu yukarıda tutmak için yük tutma valfi veya mekanik kilit, aşağıdan “yukarı kilitli” duruma geçmek için de ayrıca güç gerekir. Yukarıdaki kol potansiyel enerji taşır, “basınçsız” sayılmaz. Varsa acil hızlı kaldırma (EFO) modunun emniyet ilişkisi ve itfaiye/ambulans için manuel indirme tanımlı değil. Kurs sözlüğü güvenli durum için “Bağlama bağlıdır” diyor. Çelişki Lab 6 ve Lab 7'ye de taşınmış: olayda ve YZ belirsizliğinde bariyer “güvenli durumda (yukarı, kilitli)” tutuluyor; bariyer aşağıdaysa bu duruma geçmek, kaçınılmak istenen hareketin kendisi (A21).</td><td>Lab1 · S2, S6; Lab6 · 1; Lab7 · 2–3; [3]</td><td><span class="pill">Beyan</span></td><td class="num">3</td><td class="num">2</td><td class="score">6</td></tr>
+      <tr><td class="code"><span class="warn">⚠︎</span> W8</td><td><span class="ttl">Araç ve insan varlığında zayıf algılama zinciri</span>Loop dedektör emniyet zincirinde değil; yük tek bir optik tarayıcıda. Bariyer dış ortamda çalışıyor, ama tarayıcının dış ortam sınıfı (ör. IEC TS 62998) belirtilmemiş: yağmur, kar, sis ve güneş ışığı bir risk. Lab 1 S8'deki “Alan tarayıcı beslemesi kesilirse sensör kör hâle gelir, emniyet fonksiyonu tetiklenmez” ifadesi fail-safe ilkesine aykırı. Emniyet sınıfı bir tarayıcıda enerji kaybı OSSD çıkışlarını kapatır ve durdurmayı tetikler; ifade ya tarayıcının emniyet sınıfı olmadığını ya da bir hatayı gösteriyor.</td><td>Lab1 · şema, S8; Lab5 · SBOM; [26]</td><td><span class="pill">Beyan</span></td><td class="num">3</td><td class="num">2</td><td class="score">6</td></tr>
+      <tr><td class="code"><span class="warn">⚠︎</span> W9</td><td><span class="ttl">PLr/SIL gerekçesiz ve doğrulanmamış</span>PLr d / SIL 2 risk grafiğiyle türetilmemiş. Ağır yaralanma (S2), sık maruziyet (F2) ve hızlı hareket nedeniyle düşük kaçınabilirlik (P2) varsayılırsa ISO 13849-1 PLr e verir. Bileşenin SIL sertifikası fonksiyonun PL'i değildir; tarayıcı → PLC → vana zincirinin ISO 13849-2 doğrulaması yok. Lab 1 S1'de sayılan hidrolik hortum patlaması için bir emniyet fonksiyonu tanımlanmamış.</td><td>Lab1 · S1, S5</td><td><span class="pill">Beyan</span></td><td class="num">3</td><td class="num">2</td><td class="score">6</td></tr>
+      <tr class="grp"><td colspan="7">D · Yazılım yaşam döngüsü</td></tr>
+      <tr><td class="code">W10</td><td><span class="ttl">Desteği bitmiş (EOL) bileşenler</span>HMI'da Windows CE 6.0 (uzatılmış destek 10.04.2018'de bitti [25]); uzak modülde OpenVPN 2.4.5 (2.4 dalı desteklenmiyor, son sürüm 2.4.12 [24]). OpenVPN imzalı üretici firmware'inin içinde olduğundan yama tamamen üreticinin yeni firmware yayınına bağlı.</td><td>Lab5 · SBOM, B1–B2, C; [24] [25]</td><td><span class="pill">Beyan</span></td><td class="num">2</td><td class="num">3</td><td class="score">6</td></tr>
+      <tr><td class="code">W11</td><td><span class="ttl">SBOM eksik; VEX ve CVD politikası yok</span>Tablo 6 kalemden oluşuyor. İpucu listesindeki ANPR yazılımı ve endüstriyel iletişim yığını (Modbus/Profinet) yok; PLC runtime/firmware, gömülü Linux çekirdeği ve OpenSSL gibi alt bağımlılıklar da yok. “SICK/Pepperl” iki ayrı tedarikçi; “Gömülü ARM” bir işletim sistemi değil. Makine-okunur format (CycloneDX/SPDX) kullanılmamış. CRA Ek I Kısım II, (1)'de makine-okunur bir SBOM, (5)'te koordineli zafiyet ifşası (CVD) politikası istiyor.</td><td>Lab5 · A; [9]</td><td><span class="pill taslak">Taslak</span></td><td class="num">2</td><td class="num">3</td><td class="score">6</td></tr>
+      <tr><td class="code">W12</td><td><span class="ttl">CVE ve yama kararlarında yöntem hataları</span>CVE-2020-15078 yalnızca ertelenmiş kimlik doğrulama kullanan OpenVPN sunucularında ortaya çıkıyor; bileşen “istemci” ise kursun üç şartından “ulaşılabilirlik” sağlanmıyor. SIL 2 sertifikasından ve bilinen CVE bulunmamasından “Düşük” risk sonucu çıkarılması hatalı: SIL kasıtlı saldırıyı kapsamaz ve Emniyet PLC bugün internete açık modülle aynı segmentte. En riskli bileşen (uzak modül firmware'i) yama matrisinde yer almıyor. Modül emniyet fonksiyonunun parçası olmadığı için “bariyer sistemi bakım penceresi dışında durdurulamamaz” gerekçesi, modülün hemen kapatılmasına engel değil.</td><td>Lab5 · B1–B2, C; [2] [23]</td><td><span class="pill taslak">Taslak</span></td><td class="num">2</td><td class="num">3</td><td class="score">6</td></tr>
+      <tr class="grp"><td colspan="7">E · Yerel arayüzler</td></tr>
+      <tr><td class="code"><span class="warn">⚠︎</span> W13</td><td><span class="ttl">Korumasız yerel ve fiziksel arayüzler</span>Kilitsiz USB bağlantı noktası, bina ağından erişilebilen HMI web arayüzü ve varsayılan açık servis portu. Lab 3'teki S2 (USB, skor 12) ve S3 (HMI) senaryolarına rağmen ne hedef mimaride ne de telafi edici kontrollerde bir önlem var.</td><td>Lab2 · A; Lab3 · S2–S3; Lab4 · A; Lab5 · B3</td><td><span class="pill">Beyan</span></td><td class="num">3</td><td class="num">2</td><td class="score">6</td></tr>
+      <tr class="grp"><td colspan="7">F · Değerlendirme ve belgeleme</td></tr>
+      <tr><td class="code">W15</td><td><span class="ttl">Belgeler arası çelişkiler ve düşük kanıt olgunluğu <span class="tag upd">güncellendi</span></span>Emniyet PLC için Lab 5 SBOM'unun “Ağa Açık mı?” sütununda “Hayır (fiziksel)” yazıyor, Lab 4'te ise uzak modülle “aynı ağ segmentinde”. Kontrol PLC Lab 5'te “Hayır (izole)”, oysa Lab 3'te USB ve bina ağı zincirlerinde yer alıyor. Lab 4 “Tünel yok” diyor, Lab 5'te internete açık bir OpenVPN var; hedefte IPSec seçilmiş, Lab 5'te OpenVPN yaması planlanmış. Kapaktaki “SAMİB sertifikalı” ifadesinin dayanağı yok: SAMİB, Sakarya Makina İmalatçıları Birliği'dir [5]; Lab 6–7'de de uzak modülün adı “SAMİB” olarak sürüyor (A14). Güçlü yönlerin tamamı Beyan/Taslak seviyesinde.</td><td>Ek A; [5]</td><td><span class="pill">Beyan</span></td><td class="num">2</td><td class="num">3</td><td class="score">6</td></tr>
+      <tr><td class="code">W14</td><td><span class="ttl">Risk kaydında kapsam ve kalibrasyon sorunları</span>Dört saldırgan profilinden “tedarik zinciri” kullanılmamış; ANPR ağ arayüzü ve açık servis portu senaryolaştırılmamış. S1'de internete açık cihaz ve varsayılan parola için L=2 düşük kalmış; kursun “fırsatçı dış” profili L=3 gerektirir (skor 27). S3'te bina ağından erişilen EOL HMI için L=1 düşük; L=2 ile skor 12 (Yüksek) olur. S3'ün önlemleri yalnızca idari.</td><td>Lab3; [2] (s. 24–25)</td><td><span class="pill taslak">Taslak</span></td><td class="num">2</td><td class="num">2</td><td class="score">4</td></tr>
+      <tr><td class="code">W16</td><td><span class="ttl">ANPR ve kart okuyucu için veri koruma tasarımı yok</span>Plaka ve kimlik verisinin saklama süresi, erişim yetkisi, minimizasyonu ve uzak modüle ya da buluta akışı tanımsız; ANPR ayrı bir bölgeye alınmamış. Üretici plaka tanıma sistemleri de ürettiğinden [6] bu sorumluluk büyük olasılıkla doğrudan üreticide; doğrulanmalı.</td><td>Lab2 · A; [6]</td><td><span class="pill">Beyan</span></td><td class="num">2</td><td class="num">2</td><td class="score">4</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ FIRSATLAR ============ -->
+<section class="page">
+  <p class="eyebrow">SWOT ANALİZİ · Ayrıntı</p>
+  <h2>Fırsatlar (O)</h2>
+  <table class="detail d-o">
+    <colgroup><col style="width:7%"><col style="width:63%"><col style="width:16%"><col style="width:4%"><col style="width:4%"><col style="width:6%"></colgroup>
+    <thead><tr><th>Kod</th><th>Madde ve gerekçe</th><th>Kanıt</th><th>E</th><th>O</th><th>Puan</th></tr></thead>
+    <tbody>
+      <tr><td class="code">O1</td><td><span class="ttl">Makine Tüzüğü (AB) 2023/1230 ile erken uyum</span>Tüzük 20 Ocak 2027'den itibaren geçiş dönemi olmadan uygulanıyor. EHSR 1.1.9 (bozulmaya karşı koruma, müdahale kanıtı) ve 1.2.1 (öngörülebilir kötü niyetli girişimlere dayanım) siber güvenliği CE'nin ön şartı yapıyor. Lab 4 B2'de yazılan, emniyet konfigürasyonunun yalnızca fiziksel/yerel erişimle değiştirilebilmesi gereksinimi bu maddelerle zaten örtüşüyor; erken uyum AB pazarında öne geçirir.</td><td>[11]; Lab4 · B2</td><td class="num">3</td><td class="num">2</td><td class="score">6</td></tr>
+      <tr><td class="code">O2</td><td><span class="ttl">CRA'ya hazır ürün sürümü</span>Ana yükümlülükler 11 Aralık 2027'de başlıyor: varsayılan olarak güvenli yapılandırma, makine-okunur SBOM, CVD politikası ve en az 5 yıllık destek süresi (Md. 13(8)). Lab 5 taslakları bu pakete dönüştürülebilir. Üreticinin Avrupa'ya satışlarını artırma hedefi [7], bu fırsatı doğrudan pazar erişimine bağlıyor.</td><td>[9] [10] [7]</td><td class="num">3</td><td class="num">2</td><td class="score">6</td></tr>
+      <tr><td class="code">O3</td><td><span class="ttl">Köprü standartlar ve hazır çerçeveler</span>IEC TS 63074:2023, fonksiyonel emniyet ile IEC 62443 arasındaki köprü belgedir. IEC 62443-4-1/4-2, hem CRA hem Makine Tüzüğü için öngörülen uyumlaştırılmış standartlar arasında anılıyor [14]. prEN 50742 (bozulmaya karşı koruma) taslak aşamasında. Bootcamp'in Evidence Pack (15 başlık) ve RACI şablonları da hazır.</td><td>[13] [14] [11]; [2] (s. 38–40)</td><td class="num">2</td><td class="num">3</td><td class="score">6</td></tr>
+      <tr><td class="code">O4</td><td><span class="ttl">Olgun ve erişilebilir güvenlik teknolojileri</span>Jump server / ayrıcalıklı erişim yönetimi, MFA, tek yönlü ağ geçidi (veri diyotu), OT saldırı tespit sistemleri, imzalı firmware ve güvenli önyükleme piyasada hazır. Lab 4 hedef mimarisi büyük ölçüde hazır ürünlerle uygulanabilir.</td><td>Lab4 · A <span class="pill deg">Değ.</span></td><td class="num">2</td><td class="num">3</td><td class="score">6</td></tr>
+      <tr><td class="code">O5</td><td><span class="ttl">Dış ortam sertifikalı emniyet sensörleri</span>Örneğin SICK outdoorScan3, IEC TS 62998 kapsamında dış ortam için sertifikalı ilk emniyet lazer tarayıcı (PL d / SIL 2, yağmur ve sis filtreleri). Loop dedektör veya radarla birlikte farklı teknolojili (diverse) algılama kurulabilir.</td><td>[26]</td><td class="num">2</td><td class="num">2</td><td class="score">4</td></tr>
+      <tr><td class="code">O6</td><td><span class="ttl">Güvenli tedarikçiye artan düzenleyici talep</span>NIS2 Md. 21(2)(d), kapsamdaki kuruluşlardan doğrudan tedarikçilerinin güvenliğini yönetmelerini istiyor. 7545 sayılı Kanun Md. 7/1-c, kamu kurumları ve kritik altyapılarda kullanılacak siber güvenlik ürünlerinin Başkanlıkça yetkilendirilmiş/belgelendirilmiş tedarikçilerden alınmasını öngörüyor. Üreticinin hedef segmentleri (havalimanı, enerji, kamu) tam olarak bu müşteriler.</td><td>[17] [18] [6]</td><td class="num">2</td><td class="num">2</td><td class="score">4</td></tr>
+      <tr><td class="code">O7</td><td><span class="ttl">Kurulu tabana retrofit paketi ve servis geliri</span>Güvenli uzak erişim ağ geçidi, HMI yenileme ve veri diyotundan oluşan bir güvenlik retrofit paketi sunulabilir. Tek yönlü telemetri (hidrolik basınç, yağ sıcaklığı, çevrim sayısı, sensör sağlığı) üzerinden kestirimci bakım hizmeti verilebilir.</td><td>S4; Lab4 <span class="pill deg">Değ.</span></td><td class="num">2</td><td class="num">2</td><td class="score">4</td></tr>
+      <tr><td class="code">O8</td><td><span class="ttl">HVM talebi ve ISO 22343-1:2023 geçişi</span>Araç bariyeri testinde IWA 14-1:2013'ün yerini ISO 22343-1:2023 aldı. Üreticinin mevcut IWA 14-1 test geçmişi (S7), “çarpışma testli + siber güvenli” konumlandırmanın temelini oluşturabilir.</td><td>[15]; S7</td><td class="num">2</td><td class="num">2</td><td class="score">4</td></tr>
+      <tr><td class="code">O9</td><td><span class="ttl">YZ destekli ek algılama katmanı (Lab 7) <span class="tag upd">güncellendi</span></span>Lab 7'de insan/araç ayıran sınıflandırıcı için güvenli mimari tanımlandı (S11): YZ yalnızca öneri verir, emniyet YZ'nin dışında kalır. Kazanç sınırlı: koruma alanında nesne varken YZ duruşu kaldıramadığı için gereksiz duruşlar yalnızca uyarı alanında ve normal kontrol yolunda azaltılabilir. Kurs ilkesi: “Prediction ≠ Safety”; emniyet, YZ'nin dışında bağımsız bir mimariyle garanti edilir (ayrıca bkz. T12).</td><td>[2] (s. 37); [3]; Lab7</td><td class="num">2</td><td class="num">1</td><td class="score">2</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ TEHDİTLER ============ -->
+<section class="flow">
+  <p class="eyebrow">SWOT ANALİZİ · Ayrıntı</p>
+  <h2>Tehditler (T)</h2>
+  <table class="detail d-t">
+    <colgroup><col style="width:7%"><col style="width:63%"><col style="width:16%"><col style="width:4%"><col style="width:4%"><col style="width:6%"></colgroup>
+    <thead><tr><th>Kod</th><th>Madde ve gerekçe</th><th>Kanıt</th><th>E</th><th>O</th><th>Puan</th></tr></thead>
+    <tbody>
+      <tr><td class="code"><span class="warn">⚠︎</span> T1</td><td><span class="ttl">Otomatik tarama ve varsayılan parola istismarı</span>İnternete açık cihazları tarayan “fırsatçı dış” saldırganlar varsayılan parolaları dener. Emsal: 2023'te IRGC bağlantılı aktörler, internete açık ve varsayılan parolalı Unitronics PLC'leri ele geçirdi (CISA AA23-335A). W1 + W2 birleşimi bu profile birebir uyuyor.</td><td>[21]; [2] (s. 24)</td><td class="num">3</td><td class="num">3</td><td class="score">9</td></tr>
+      <tr><td class="code"><span class="warn">⚠︎</span> T2</td><td><span class="ttl">Hedefli siber-fiziksel saldırı</span>Bariyer bir güvenlik kontrolüdür. İndirilmesi yetkisiz araç girişine, yani araçla saldırıya karşı korumanın (HVM) devre dışı kalmasına yol açar; beklenmedik yükseltilmesi ya da varsa EFO işlevinin kötüye kullanılması araç ve insan zararına yol açar. Emsal: TRITON/TRISIS (2017) doğrudan bir emniyet kontrolcüsünü (Triconex) hedef aldı.</td><td>[22]; Lab3 · S1–S3</td><td class="num">3</td><td class="num">2</td><td class="score">6</td></tr>
+      <tr><td class="code"><span class="warn">⚠︎</span> T3</td><td><span class="ttl">Tedarik zinciri</span>İmzasız ya da sahte firmware güncellemesi, servis dizüstüsü ve üçüncü taraf bileşenler (OpenVPN, Windows CE, ANPR yazılımı) birer giriş noktası. CRA en az 5 yıllık destek süresi isterken OT ömrü 10–20 yıl; bileşenlerin desteğinin bitmesi bu taahhüdü zorlar.</td><td>[2] (s. 24); [9]; Lab5 · C1</td><td class="num">3</td><td class="num">2</td><td class="score">6</td></tr>
+      <tr><td class="code">T4</td><td><span class="ttl">Bildirim yükümlülükleri ve yaptırımlar (CRA, 7545) <span class="tag upd">güncellendi</span></span>CRA'da aktif olarak istismar edilen zafiyet ve ciddi olay bildirimi 11 Eylül 2026'dan beri yürürlükte. Yükümlülük, piyasaya arz tarihinden bağımsız olarak mevcut ürünleri de kapsıyor: 24 s erken uyarı, 72 s bildirim, ardından nihai rapor. Nihai rapor süresi ikiye ayrılıyor: aktif istismar edilen zafiyette düzeltici önlem hazır olduktan sonra 14 gün, ciddi olayda 72 saatlik bildirimden itibaren bir ay (Lab 6'daki “14 gün” için bkz. A22). Ek I ve Md. 13–14 ihlallerinde ceza 15 M€'ya ya da küresel cironun %2,5'ine kadar çıkıyor (Md. 64(2)); bu, ürünün AB'de piyasaya arz edilmesi halinde geçerli. Türkiye'de 7545 Md. 7/1-b zafiyet ve olayların gecikmeksizin bildirilmesini istiyor; Md. 16/10 uyulmamasına 1–10 milyon TL idari para cezası öngörüyor. Oturum kaydı olmadan (W3) bildirim içeriği üretilemez.</td><td>[9] [10] [18]; Lab6 · 3–5</td><td class="num">3</td><td class="num">2</td><td class="score">6</td></tr>
+      <tr><td class="code">T5</td><td><span class="ttl">Makine Tüzüğü sonrası CE riski</span>20 Ocak 2027'den itibaren siber güvenlik kanıtı olmayan bir makine CE alamaz ve AB pazarına erişimini kaybeder. Uyumlaştırılmış standartlardaki gecikme (prEN 50742 hâlâ taslak) hedefi belirsizleştiriyor. Kurs: “İki mevzuat birbirini otomatik karşılamaz — her biri için AYRI kanıt üretilir.”</td><td>[11]; [2] (s. 6)</td><td class="num">3</td><td class="num">2</td><td class="score">6</td></tr>
+      <tr><td class="code"><span class="warn">⚠︎</span> T7</td><td><span class="ttl">Kaza, sorumluluk ve regülatör incelemesi</span>Otomatik yükselen bariyer ve bolard kazaları gerçek: Birleşik Krallık'ta (Watford) yükselen bir bolardın bir bisikletliyi yaraladığı ve otobüsleri kaldırdığı raporlandı. Motorlu kapı kaynaklı çocuk ölümlerinin ardından HSE 2011'de EN 12453'e resmî itirazda bulundu; Komisyon 2015'te uyarı yayımladı.</td><td>[27] [16]</td><td class="num">3</td><td class="num">2</td><td class="score">6</td></tr>
+      <tr><td class="code"><span class="warn">⚠︎</span> T8</td><td><span class="ttl">Fidye yazılımı ve kullanılabilirlik saldırısı <span class="tag upd">güncellendi</span></span>Bina ağından HMI'ya uzanan yol (Lab 3 S3) yanal hareket ve fidye yazılımına açık; HMI ya da uzak modül kilitlenirse geçiş durur. Bariyer yukarıda kilitli kalırsa itfaiye ve ambulans geçemez; bu da dolaylı bir can güvenliği riski. Lab 6'daki olay akışı da bariyeri yukarıda kilitli tutuyor; acil araç geçişi için manuel indirme adımı yok.</td><td>Lab3 · S3; Lab6 · 1; W7</td><td class="num">3</td><td class="num">2</td><td class="score">6</td></tr>
+      <tr><td class="code">T10</td><td><span class="ttl">EOL platformlarda biriken zafiyetler</span>Windows CE 6.0 için yama hiç gelmeyecek; OpenVPN 2.4 dalı desteksiz. Her yeni zafiyet kalıcı bir açık olarak birikir. HMI değişimi emniyet yeniden doğrulaması (safety validation) gerektirdiği için maliyetli ve uzun.</td><td>[24] [25]; Lab5 · C</td><td class="num">2</td><td class="num">3</td><td class="score">6</td></tr>
+      <tr><td class="code">T6</td><td><span class="ttl">Yeni Ürün Sorumluluğu Direktifi (AB) 2024/2853</span>Üye devletler direktifi 9 Aralık 2026'ya kadar iç hukuka aktaracak. Yazılım “ürün” sayılıyor, eksik güvenlik güncellemesi kusur oluşturabiliyor ve önceki sorumluluk tavanı kaldırılıyor.</td><td>[19]</td><td class="num">2</td><td class="num">2</td><td class="score">4</td></tr>
+      <tr><td class="code">T9</td><td><span class="ttl">KVKK / GDPR yaptırımları</span>Plaka üzerinden kimlik tespiti kişisel veri işleme sayılıyor. Örneğin aydınlatma yükümlülüğünü yerine getirmeyen bir otopark işletmesine 75.000 TL idari para cezası verildi. Veri sorumlusu işletmeci olsa da ürün tasarımı uyumu kolaylaştırır ya da zorlaştırır.</td><td>[20]</td><td class="num">2</td><td class="num">2</td><td class="score">4</td></tr>
+      <tr><td class="code">T11</td><td><span class="ttl">Rekabet</span>Hem çarpışma sertifikalı hem IEC 62443 sertifikalı ürün sunan rakipler, NIS2 ve 7545 kaynaklı tedarik kriterlerini karşılayarak kritik altyapı ihalelerini alabilir.</td><td>[17] [18] <span class="pill deg">Değ.</span></td><td class="num">2</td><td class="num">2</td><td class="score">4</td></tr>
+      <tr><td class="code">T13</td><td><span class="ttl">Nitelikli personel kıtlığı</span>OT siber güvenliği ile fonksiyonel emniyeti birlikte bilen uzman sayısı sınırlı. Bu, hedef mimarinin uygulanmasını ve sürdürülmesini riske sokar.</td><td><span class="pill deg">Değ.</span></td><td class="num">2</td><td class="num">2</td><td class="score">4</td></tr>
+      <tr><td class="code">T12</td><td><span class="ttl">YZ'nin emniyet fonksiyonuna girmesi <span class="tag upd">güncellendi</span></span>Kendi kendine evrilen (makine öğrenmeli) davranışa sahip emniyet bileşenleri Makine Tüzüğü Ek I Kısım A'da; onaylanmış kuruluş katılımı zorunlu. O9 emniyet fonksiyonunun içine taşınırsa uygunluk değerlendirme yükü büyür. Lab 7 kararı YZ'ye kapatma yetkisi vermiyor ve emniyeti YZ'nin dışında tutuyor (S11); bu karar korundukça risk düşük kalır. Kayma riski: “gereksiz duruşları azaltma” hedefine koruma alanını susturarak (muting) ulaşılırsa YZ emniyet fonksiyonuna girer (A23).</td><td>[12]; Lab7 · 1</td><td class="num">2</td><td class="num">1</td><td class="score">2</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ STRATEJİK DURUŞ VE TOWS ============ -->
+<section class="page">
+  <p class="eyebrow">SWOT ANALİZİ · Sentez</p>
+  <h2>Stratejik Duruş ve TOWS</h2>
+  <div class="posture">
+    <div>
+      <table>
+        <thead><tr><th>Kadran</th><th>Madde</th><th>Toplam</th><th>Ortalama</th><th class="warn" style="color:#fff">⚠︎</th></tr></thead>
+        <tbody>
+          <tr><td style="color:#1e7b34;font-weight:bold">S</td><td class="num">11</td><td class="num">52</td><td class="num"><b>4,73</b></td><td class="num">4</td></tr>
+          <tr><td style="color:#b42318;font-weight:bold">W</td><td class="num">16</td><td class="num">104</td><td class="num"><b>6,50</b></td><td class="num">8</td></tr>
+          <tr><td style="color:#1f5f99;font-weight:bold">O</td><td class="num">9</td><td class="num">42</td><td class="num"><b>4,67</b></td><td class="num">0</td></tr>
+          <tr><td style="color:#b54708;font-weight:bold">T</td><td class="num">13</td><td class="num">69</td><td class="num"><b>5,31</b></td><td class="num">5</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:8px"><b>İç eksen:</b> ort(S) − ort(W) = 4,73 − 6,50 = <b>−1,77</b> · <b>Dış eksen:</b> ort(O) − ort(T) = 4,67 − 5,31 = <b>−0,64</b>.</p>
+      <p>Sonuç <b>WT</b> (savunma) kadranı: zayıflıklar tehditlerle birleşmeden kapatılmalı. Dış eksen sıfıra yakın olduğu için WT önlemlerinden hemen sonra <b>WO</b> (zayıflığı fırsatla gider) stratejileri gelir. Lab 6–7 ile eklenen iki güçlü yön (S10, S11) iç ekseni −1,83'ten −1,77'ye taşıdı; duruş değişmedi.</p>
+      <p style="font-size:6.7pt;color:#6b7280;font-style:italic">Duyarlılık kontrolü: ortalama yerine toplam kullanılsaydı (52 − 104 = −52; 42 − 69 = −27) sonuç yine WT olurdu. Ortalama, madde sayısının sonucu çarpıtmaması için tercih edildi. Değerler yön göstericidir, kesin bir ölçüm değildir.</p>
+    </div>
+    <div>
+      <svg viewBox="0 0 330 322" width="100%" style="max-width:300px;display:block;margin:0 auto" font-family="Verdana, sans-serif">
+        <rect x="40" y="10" width="135" height="135" fill="#eaf2fb"/>
+        <rect x="175" y="10" width="135" height="135" fill="#eaf6ee"/>
+        <rect x="40" y="145" width="135" height="135" fill="#fcebea"/>
+        <rect x="175" y="145" width="135" height="135" fill="#fdf1e6"/>
+        <line x1="175" y1="10" x2="175" y2="280" stroke="#6b7280" stroke-width="1"/>
+        <line x1="40" y1="145" x2="310" y2="145" stroke="#6b7280" stroke-width="1"/>
+        <rect x="40" y="10" width="270" height="270" fill="none" stroke="#cbd5e1"/>
+        <text x="50" y="32" font-size="15" font-weight="bold" fill="#1f5f99">WO</text>
+        <text x="300" y="32" font-size="15" font-weight="bold" fill="#1e7b34" text-anchor="end">SO</text>
+        <text x="50" y="272" font-size="15" font-weight="bold" fill="#b42318">WT</text>
+        <text x="300" y="272" font-size="15" font-weight="bold" fill="#b54708" text-anchor="end">ST</text>
+        <text x="40" y="294" font-size="9" fill="#4b5563" text-anchor="middle">−3</text>
+        <text x="175" y="294" font-size="9" fill="#4b5563" text-anchor="middle">0</text>
+        <text x="310" y="294" font-size="9" fill="#4b5563" text-anchor="middle">+3</text>
+        <text x="34" y="14" font-size="9" fill="#4b5563" text-anchor="end">+3</text>
+        <text x="34" y="283" font-size="9" fill="#4b5563" text-anchor="end">−3</text>
+        <text x="175" y="314" font-size="9" fill="#4b5563" text-anchor="middle">İç: ort(S) − ort(W)</text>
+        <text x="14" y="145" font-size="9" fill="#4b5563" text-anchor="middle" transform="rotate(-90 14 145)">Dış: ort(O) − ort(T)</text>
+        <line x1="175" y1="145" x2="95.35" y2="173.8" stroke="#b42318" stroke-width="1.2" stroke-dasharray="3 3"/>
+        <circle cx="95.35" cy="173.8" r="6" fill="#b42318"/>
+        <text x="104" y="198" font-size="10" font-weight="bold" fill="#7f1d1d">(−1,77 ; −0,64)</text>
+      </svg>
+    </div>
+  </div>
+
+  <h4>TOWS matrisi — maddelerden stratejiye</h4>
+  <table class="tows">
+    <thead><tr><th style="background:#fff"></th><th class="colh" style="background:#1e7b34">Güçlü Yönler (S)</th><th class="colh" style="background:#b42318">Zayıf Yönler (W)</th></tr></thead>
+    <tbody>
+      <tr>
+        <th class="rowh" style="background:#1f5f99">Fırsatlar (O)</th>
+        <td>
+          <p><b>SO1 · Emniyet bağımsızlığını kanıta dönüştür.</b> <span class="tag upd">güncellendi</span> Lab 4 B2 gereksinimini ağ kesme, konfigürasyon yazma denemesi ve hata enjeksiyonu testleriyle doğrula; Lab 7'deki YZ'siz fallback modunu da aynı testlerle sına. Sonuçları EP03/EP15'e “Doğrulanmış kayıt” olarak koy; Makine Tüzüğü 1.1.9/1.2.1 teknik dosyasına ve CRA teknik dokümantasyonuna bağla.<span class="bag">Bağ: S1, S2, S5, S11 × O1, O2, O3</span></p>
+          <p><b>SO2 · “Çarpışma testli + siber güvenli” konumlandırma.</b> IWA 14-1 test geçmişini ISO 22343-1 ve IEC 62443-4-2 ile birleştir; NIS2 ve 7545 kapsamındaki havalimanı, enerji ve kamu müşterilerine hedefli teklif ver.<span class="bag">Bağ: S6, S7 × O3, O6, O8</span></p>
+        </td>
+        <td>
+          <p><b>WO1 · Secure-by-default sürüm + retrofit paketi.</b> Cihaza özgü kimlik bilgisi ve ilk kurulumda parola değişimi; internete doğrudan erişim yok; jump server, MFA ve kişisel hesap; oturum kaydı → SIEM; OpenVPN'in desteklenen sürüme taşınması; HMI platform göçü. Aynı paketi kurulu tabana da sun.<span class="bag">Bağ: W1–W3, W10 × O2, O4, O7</span></p>
+          <p><b>WO2 · Emniyet konseptini yeniden kur.</b> Bağlama duyarlı güvenli durum matrisi; loop ve dış ortam sınıfı tarayıcıyla farklı teknolojili algılama; PLr'yi risk grafiğiyle türet ve ISO 13849-2 ile doğrula; EFO ve acil araç kurallarını yaz; emniyet–güvenlik etkileşimini IEC TS 63074 ile analiz et.<span class="bag">Bağ: W7–W9 × O3, O5 (T7 ve T8'i de azaltır)</span></p>
+        </td>
+      </tr>
+      <tr>
+        <th class="rowh" style="background:#b54708">Tehditler (T)</th>
+        <td>
+          <p><b>ST1 · “TRITON dersi”.</b> Emniyet PLC'yi RUN modunda anahtar/parola ile kilitle; emniyet imzası (CRC) değişince alarm ver; konfigürasyonu yalnızca yerel porttan değiştir; imzalı firmware'i doğrula; uzak modül ile emniyet segmenti arasında yalnızca tek yönlü geçişe izin ver.<span class="bag">Bağ: S1, S2, S8 × T1, T2, T3</span></p>
+          <p><b>ST2 · Olay hazırlığı (Lab 6).</b> <span class="tag upd">güncellendi</span> Lab 6'da yazılan akışı ve rolleri tatbikatla sına; planın dayandığı kanıt altyapısını kur (log saklama, bilinen-iyi yedek, CRC); “resetle-düzelir” yasağını prosedüre yaz; acil manuel indirme adımını ekle.<span class="bag">Bağ: S5, S6, S10 × T4, T8</span></p>
+        </td>
+        <td>
+          <p><b>WT1 · 0–30 gün saldırı yüzeyi daraltma.</b> Modülü internetten çek (varsayılan kapalı), “admin/1234”ü kapat, USB'yi fiziksel olarak kilitle, HMI'yı bina ağından ayır, servis portunu kapat. SBOM ve VEX'i tamamla; CVE'leri üç şartla yeniden değerlendir.<span class="bag">Bağ: W1, W2, W4, W11–W13 × T1, T3, T4, T8</span></p>
+          <p><b>WT2 · Veri koruma ve ayrıştırma.</b> ANPR'yi ayrı bölgeye al; veri minimizasyonu, saklama süresi ve aydınlatma metni şablonu hazırla; gerekirse veri koruma etki değerlendirmesi yap.<span class="bag">Bağ: W6, W16 × T9</span></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ YOL HARİTASI VE KANIT DURUMU ============ -->
+<section class="page">
+  <p class="eyebrow">SWOT ANALİZİ · Eylem</p>
+  <h2>90 Günlük Yol Haritası ve Kanıt Durumu</h2>
+  <h4 style="margin-top:2px">Öncelik sırası WT → WO → ST → SO · RACI'de A (nihai sorumlu) her satırda Yönetim; tabloda R (yapan) rolleri gösterilir.</h4>
+  <table class="road">
+    <colgroup><col style="width:7%"><col style="width:3%"><col style="width:38%"><col style="width:9%"><col style="width:12%"><col style="width:10%"><col style="width:21%"></colgroup>
+    <thead><tr><th>Dönem</th><th>#</th><th>Eylem</th><th>TOWS</th><th>Evidence Pack</th><th>R</th><th>Başarı ölçütü</th></tr></thead>
+    <tbody>
+      <tr><td class="per" rowspan="6">0–30 gün</td><td>1</td><td>Uzak modülü internetten çek; erişim varsayılan olarak kapalı olsun, yalnızca onaylı bakım penceresinde açılsın.</td><td>WT1</td><td>EP06</td><td>OT, IT</td><td>Dış taramada port 443 kapalı; erişim talep/onay kaydı var</td></tr>
+      <tr><td>2</td><td>“admin/1234” ve tüm paylaşılan hesapları kapat; kişisel hesap + MFA'ya geç.</td><td>WT1 · WO1</td><td>EP07</td><td>OT, IT</td><td>Kullanıcı/rol matrisi; paylaşılan hesap = 0</td></tr>
+      <tr><td>3</td><td>USB portlarını fiziksel olarak kilitle, servis portunu kapat, HMI'yı bina ağından ayır.</td><td>WT1</td><td>EP02 · EP05</td><td>OT, IT</td><td>Port envanteri ve firewall kural kaydı</td></tr>
+      <tr><td>4</td><td>Oturum ve olay kaydını aç; logları merkezi ve değiştirilemez biçimde sakla (Lab 6 kanıt listesinin ön şartı). <span class="tag upd">güncellendi</span></td><td>WO1 · ST2</td><td>EP13</td><td>OT, IT</td><td>Son 30 günün erişim logu sorgulanabilir</td></tr>
+      <tr><td>5</td><td>Emniyet PLC'ye konfigürasyon kilidi (RUN/parola) koy; emniyet imzasını (CRC) ve bilinen-iyi konfigürasyon yedeğini kayıt altına al. <span class="tag upd">güncellendi</span></td><td>ST1 · ST2</td><td>EP03 · EP12 · EP14</td><td>Safety</td><td>Referans CRC ve yedek kayıtlı; değişiklik alarmı test edilmiş</td></tr>
+      <tr><td>6</td><td>Föy tutarlılık düzeltmelerini yap (Ek A, Lab 1–7); SBOM'u CycloneDX biçiminde tamamla, VEX ekle. <span class="tag upd">güncellendi</span></td><td>WT1 · WO2</td><td>EP08 · EP09 · EP10</td><td>Tasarım, OT</td><td>SBOM ipucu listesinin tamamını kapsıyor; her CVE için VEX durumu var</td></tr>
+      <tr><td class="per" rowspan="6">31–90 gün</td><td>7</td><td>Lab 4 hedef mimarisini kur: DMZ'de jump server, VPN, segmentasyon; uzak modülden emniyet segmentine yalnızca tek yönlü geçiş.</td><td>WO1 · ST1</td><td>EP02 · EP05 · EP06</td><td>OT, IT</td><td>Zone/conduit diyagramı v2; SL-T atanmış</td></tr>
+      <tr><td>8</td><td>Bağlama duyarlı güvenli durum matrisini, EFO ve acil araç kurallarını ve manuel indirme prosedürünü yaz.</td><td>WO2 · ST2</td><td>EP03</td><td>Safety</td><td>Onaylı matris; tatbikat kaydı</td></tr>
+      <tr><td>9</td><td>PLr'yi risk grafiğiyle yeniden türet; ISO 13849-2 doğrulama planını hazırla.</td><td>WO2</td><td>EP03 · EP15</td><td>Tasarım, OT, Safety</td><td>S/F/P gerekçesi; doğrulama planı</td></tr>
+      <tr><td>10</td><td>Emniyet bağımsızlığı testleri: ağ kesme, konfigürasyon yazma denemesi, hata enjeksiyonu; YZ projesi başlarsa YZ çıktısının emniyet yolunu etkileyemediği de test edilir. <span class="tag upd">güncellendi</span></td><td>SO1</td><td>EP15</td><td>Safety, OT</td><td>Test raporu → “Doğrulanmış kayıt”</td></tr>
+      <tr><td>11</td><td>Lab 6 olay müdahale akışını tatbikatla sına: CRA 24 s / 72 s ve nihai rapor zinciri (zafiyet: düzeltmeden sonra 14 gün; ciddi olay: bir ay), roller ve kanıt devri. <span class="tag upd">güncellendi</span></td><td>ST2</td><td>EP13</td><td>OT, IT</td><td>Tatbikat raporu; rol listesi; kanıt zinciri kaydı</td></tr>
+      <tr><td>12</td><td>ANPR veri akışını ayır: ayrı bölge, saklama süresi, aydınlatma metni.</td><td>WT2</td><td>EP05</td><td>OT, IT</td><td>Veri akış haritası; saklama politikası</td></tr>
+      <tr><td class="per" rowspan="4">90+ gün</td><td>13</td><td>HMI platformunu desteklenen bir işletim sistemine taşı; emniyeti yeniden doğrula.</td><td>WO1</td><td>EP11 · EP14 · EP15</td><td>OT</td><td>EOL bileşen sayısı = 0</td></tr>
+      <tr><td>14</td><td>OpenVPN'i desteklenen sürüme taşıyan imzalı firmware'i yayımla; CVD politikasını ilan et.</td><td>WO1</td><td>EP10 · EP11</td><td>OT (üretici)</td><td>Firmware sürüm notu; CVD sayfası</td></tr>
+      <tr><td>15</td><td>IEC 62443-4-1 süreçlerini uyarla; IEC 62443-4-2 bileşen boşluk analizini yap.</td><td>SO2</td><td>EP15</td><td>Tasarım, OT</td><td>Boşluk analizi raporu</td></tr>
+      <tr><td>16</td><td>RB-HRB için ISO 22343-1 test planını, Makine Tüzüğü teknik dosyasını ve CRA uyum yol haritasını (11.12.2027) hazırla.</td><td>SO1 · SO2</td><td>EP01–EP15</td><td>Tasarım, Safety</td><td>Teknik dosya taslağı</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Evidence Pack kanıt durumu (bu analizin değerlendirmesi)</h4>
+  <table class="ep">
+    <colgroup><col style="width:20%"><col style="width:8%"><col style="width:22%"><col style="width:20%"><col style="width:8%"><col style="width:22%"></colgroup>
+    <thead><tr><th>Başlık</th><th>Durum</th><th>Dayanak</th><th>Başlık</th><th>Durum</th><th>Dayanak</th></tr></thead>
+    <tbody>
+      <tr><td>01 Asset Inventory</td><td class="st-taslak">Taslak</td><td>Lab 2 varlık listesi</td><td>09 SBOM</td><td class="st-taslak">Taslak</td><td>makine-okunur değil</td></tr>
+      <tr><td>02 Network Architecture</td><td class="st-taslak">Taslak</td><td>Lab 4 mevcut/hedef</td><td>10 Vulnerability Records</td><td class="st-taslak">Taslak</td><td>Lab 5 B (yöntem hataları)</td></tr>
+      <tr><td>03 Safety Functions</td><td class="st-taslak">Taslak</td><td>Lab 1 + Lab 7 (güvenli durum çelişkili)</td><td>11 Patch/Update Records</td><td class="st-yok">Yok</td><td>yalnızca karar matrisi</td></tr>
+      <tr><td>04 Cyber Risk Assessment</td><td class="st-taslak">Taslak</td><td>Lab 3 (3 senaryo)</td><td>12 Backup &amp; Restore</td><td class="st-yok">Yok</td><td>Lab 6 bilinen-iyi yedeği varsayıyor; prosedür yok</td></tr>
+      <tr><td>05 Zone &amp; Conduit</td><td class="st-taslak">Taslak</td><td>Lab 2</td><td>13 Incident Response <span class="tag upd">güncellendi</span></td><td class="st-taslak">Taslak</td><td>Lab 6 akışı; tatbikat yok</td></tr>
+      <tr><td>06 Remote Access Procedure</td><td class="st-taslak">Taslak</td><td>Lab 2 B kararları</td><td>14 Change Management</td><td class="st-yok">Yok</td><td>Lab 6 değişiklik kaydını varsayıyor; prosedür yok</td></tr>
+      <tr><td>07 User/Role Matrix</td><td class="st-yok">Yok</td><td>yalnızca “kişisel hesap” kararı</td><td>15 Verification/Test</td><td class="st-yok">Yok</td><td>Lab 7 yalnızca YZ kabul ölçütü veriyor; test kaydı yok</td></tr>
+      <tr><td>08 Software/Firmware Inv.</td><td class="st-taslak">Taslak</td><td>Lab 5 tablosu</td><td colspan="3" style="color:#6b7280"><b>Özet:</b> 10 Taslak · 5 Yok · 0 Var · 0 Doğrulanmış</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ EK A ============ -->
+<section class="page">
+  <p class="eyebrow">SWOT ANALİZİ · Ek A</p>
+  <h2>Ek A — Föy Tutarlılık Denetimi</h2>
+  <h4 style="margin-top:2px">Lab 1–5 (v3-3) ve Lab 6–7 föyleri üzerinde · Önem: <span class="sev-y">Yüksek</span> / <span class="sev-o">Orta</span> / <span class="sev-d">Düşük</span></h4>
+  <p style="font-size:6.8pt;color:#4b5563">A1–A18 ilk sürümde Lab 1–5 üzerinde bulundu; A19–A23 (mavi zeminli satırlar) bu sürümde Lab 6–7 ile eklendi.</p>
+  <table class="eka">
+    <colgroup><col style="width:4%"><col style="width:11%"><col style="width:22%"><col style="width:33%"><col style="width:8%"><col style="width:22%"></colgroup>
+    <thead><tr><th>#</th><th>Yer</th><th>Föydeki ifade</th><th>Sorun</th><th>Önem</th><th>Öneri</th></tr></thead>
+    <tbody>
+      <tr><td>A1</td><td>Lab4 · Mevcut ↔ Lab5 · SBOM</td><td>“Emniyet PLC ile aynı ağ segmentinde” ↔ “Emniyet PLC firmware … Hayır (fiziksel)”</td><td>SBOM mevcut durumu değil, hedef durumu yazıyor. Lab 5'teki “Düşük” risk notu bu yanlış girdiye dayanıyor. Kontrol PLC için “Hayır (izole)” de Lab 3'teki S2/S3 zincirleriyle çelişiyor.</td><td class="sev-y">Yüksek</td><td>SBOM'da mevcut durumu yaz; risk notlarını maruziyete göre yeniden ver.</td></tr>
+      <tr><td>A2</td><td>Lab1 · S2, S6</td><td>“hareketsiz bırakmak ve kilitli yüksek konumda tutmaktır”; “Güvenli durum: bariyer kolu YUKARI kilitli”</td><td>Emniyet ile güvenlik hedefi karışmış; hareket halindeyken yükselmek tehlikenin kendisi. EFO ve acil araç erişimi ele alınmamış.</td><td class="sev-y">Yüksek</td><td>Bağlama duyarlı güvenli durum matrisi kur (W7).</td></tr>
+      <tr><td>A3</td><td>Lab1 · S2, S6</td><td>“STO benzeri işlev”; “hidrolik sistemi basınçsız bırakır”</td><td>STO elektrikli sürücülere ait bir kavram. Hidrolikte karşılığı güvenli enerji kesme ile yük tutmadır; yukarıdaki kol potansiyel enerji taşır.</td><td class="sev-o">Orta</td><td>Terimleri düzelt; yük tutma valfi ve mekanik kilit gereksinimini ekle.</td></tr>
+      <tr><td>A4</td><td>Lab1 · S5</td><td>“PLr d / SIL 2”</td><td>S/F/P parametreleri verilmemiş; S2-F2-P2 varsayımında PLr e çıkar. Bileşenin SIL'i, fonksiyonun PL'i değildir.</td><td class="sev-o">Orta</td><td>Risk grafiği gerekçesini yaz; ISO 13849-2 doğrulamasını planla.</td></tr>
+      <tr><td>A5</td><td>Lab1 · S8</td><td>“Alan tarayıcı beslemesi kesilirse … emniyet fonksiyonu tetiklenmez”</td><td>Emniyet sınıfı bir tarayıcıda besleme kaybı OSSD çıkışlarını kapatır ve durdurmayı tetikler (fail-safe).</td><td class="sev-o">Orta</td><td>İfadeyi düzelt; tarayıcının emniyet tipini ve dış ortam sınıfını belirt.</td></tr>
+      <tr><td>A6</td><td>Lab2 · S1–S2</td><td>“Zone 2 — Kontrol Bölgesi: Kontrol PLC, Emniyet PLC, Operatör HMI”</td><td>Ayrı bir Safety Zone yok; Emniyet PLC, EOL ve bina ağına açık HMI ile aynı bölgede. Lab 4 hedefindeki “Emniyet PLC ayrı segmentte” ifadesiyle de çelişiyor. SL-T atanmamış.</td><td class="sev-o">Orta</td><td>Ayrı bir Safety Zone tanımla; bölgelere SL-T ata.</td></tr>
+      <tr><td>A7</td><td>Lab2 · S3</td><td>“C2 (Zone 2 ↔ Zone 3): Tek yönlü veri diyotu … komut yazamaz”; koruma odası PC'si Zone 3'te</td><td>Görevli bariyere komut veremez; uzaktan bakım Zone 2'ye ulaşamaz; komut akışı tanımsız.</td><td class="sev-o">Orta</td><td>Komut conduit'ini ayrıca tanımla ya da koruma odası PC'sini kontrol bölgesine al.</td></tr>
+      <tr><td>A8</td><td>Lab2 · S3 ↔ Lab4 · B1 ↔ Lab5</td><td>“C1 (Zone 1 ↔ Zone 2): … tanımlı sensör protokollerine izin” ↔ “sensör kabloları + emniyet rölesi” ↔ “Alan Tarayıcı … Hayır”</td><td>Sensörlerin kabloyla mı ağ üzerinden mi bağlandığı çelişkili; S1'deki “sensör eşiği yükseltilir” mekanizması da bu yüzden belirsiz.</td><td class="sev-o">Orta</td><td>Bağlantı türünü (OSSD mi, emniyet protokolü mü) netleştir.</td></tr>
+      <tr><td>A9</td><td>Lab4 · Mevcut ↔ Lab5; Lab2 · B</td><td>“Tünel yok (açık HTTPS)” ↔ “OpenVPN 2.4.5 … Evet — internet”; hedefte “IPSec”; “açık bağlantıda trafik dinlenebilir”</td><td>VPN'in kullanımda olup olmadığı belirsiz ve teknoloji tercihi tutarsız. HTTPS şifrelidir; asıl sorun açık arayüz ve zayıf kimlik doğrulama.</td><td class="sev-o">Orta</td><td>VPN'in rolünü ve teknolojisini tekleştir; gerekçeyi düzelt.</td></tr>
+      <tr><td>A10</td><td>Lab5 · B1, Görev C</td><td>“CVE-2020-15078: kimlik doğrulama atlatma” (VPN istemcisi)</td><td>Bu CVE sunucu tarafında, ertelenmiş kimlik doğrulama koşulunda ortaya çıkıyor; istemcide ulaşılabilir değil. İstemciyi etkileyen örnek CVE-2020-11810 düşük ciddiyetli (DoS). Daha sağlam gerekçe, 2.4 dalının desteğinin bitmiş olması.</td><td class="sev-o">Orta</td><td>Üç şartla (bileşen var / sürüm etkileniyor / ulaşılabilir) yeniden değerlendir; VEX yaz.</td></tr>
+      <tr><td>A11</td><td>Lab5 · Görev C</td><td>“Emniyet PLC firmware … Düşük (SIL2 sertifikalı)”; “Kontrol PLC … Düşük (bilinen CVE yok)”</td><td>SIL siber dayanıklılığı kapsamaz. Özel PLC uygulamasının CVE'si olmaz; PLC runtime'ına bakılmalı. En riskli bileşen olan uzak modül firmware'i matriste yok.</td><td class="sev-o">Orta</td><td>Uzak modül firmware'ini matrise ekle; risk notlarını gerekçelendir.</td></tr>
+      <tr><td>A12</td><td>Lab3 · S1, S3</td><td>S1: “L=2”; S3: “L=1”</td><td>İnternete açık cihaz ve varsayılan parola için L=3 gerekir (skor 27). Bina ağından erişilen EOL HMI için L=2 gerekir (skor 12, Yüksek). Aritmetik doğru (18 / 12 / 6).</td><td class="sev-d">Düşük</td><td>L ölçeğini kursun saldırgan profilleriyle kalibre et.</td></tr>
+      <tr><td>A13</td><td>Lab3 · S3</td><td>“'aşağı indir' komutu gönderilir → Operatör yakınında bariyer kapanır”; önlem: “simüle edilir; operatör eğitimi”</td><td>Yön tutarsız: Lab 1'de aşağı, geçişe açık demek. Önlemler yalnızca idari.</td><td class="sev-d">Düşük</td><td>Zinciri düzelt; teknik önlem ekle (HMI ayrıştırma, operatör koruması).</td></tr>
+      <tr><td>A14</td><td>Föy kapağı; Lab1 bağlam kutusu; Lab 6–7</td><td>“SAMİB sertifikalı kontrol ünitesi”; “SAMİB sertifikalı uzak izleme modülü”; Lab 6–7: “SAMİB uzak izleme modülü”, “SAMİB firmware v2.3”</td><td>SAMİB, Sakarya Makina İmalatçıları Birliği'dir [5]; sertifika iddiasının dayanağı yok. Kapakta iki ayrı öğe olan kontrol ünitesi ve uzak izleme modülü, Lab 1'de tek öğeye dönüşmüş. Lab 6–7'de modülün adı “SAMİB” olarak sürüyor.</td><td class="sev-o">Orta</td><td>“SAMİB üyesi Arma Kontrol” yaz; modülü “uzak izleme modülü” diye adlandır; gerçek sertifikaları adıyla belirt.</td></tr>
+      <tr><td>A15</td><td>Lab5 · SBOM</td><td>6 kalem; “SICK/Pepperl”; “Gömülü ARM”</td><td>ANPR yazılımı ve iletişim yığını eksik; iki ayrı tedarikçi tek satırda; işletim ortamı yanlış tanımlanmış.</td><td class="sev-d">Düşük</td><td>CycloneDX/SPDX ile tamamla.</td></tr>
+      <tr><td>A16</td><td>Lab5 · alt not</td><td>“→ Evidence Pack EP 07 SBOM &amp; CVE”</td><td>Kurs listesinde EP 07 = User/Role Matrix; SBOM = EP 09, zafiyet = EP 10, yama = EP 11. Genel föy de “EP 09 · 10 · 11” diyor.</td><td class="sev-d">Düşük</td><td>Eşlemeyi düzelt.</td></tr>
+      <tr><td>A17</td><td>Biçim</td><td>“vanavı” (Lab1 S2); “durdurulamamaz” (Lab5 B2); sayfa altı “6 / 5”</td><td>Yazım ve sayfalama hataları.</td><td class="sev-d">Düşük</td><td>Düzelt.</td></tr>
+      <tr><td>A18</td><td>Kimlik satırı</td><td>“230542018”</td><td>İlk sürümde föydeki öğrenci numarası bu analizdekiyle (230541018) uyuşmuyordu. Föyde düzeltildi (15.11.2026).</td><td class="sev-k">Kapandı</td><td>—</td></tr>
+      <tr class="v2"><td>A19</td><td>Lab6 · 2, 5 ↔ Lab4 · Mevcut</td><td>“SAMİB oturum ve kimlik doğrulama logları, VPN logları … korunur” ↔ “Oturum kaydı yok”; “Tünel yok (açık HTTPS)”</td><td>Müdahale planı, mevcut mimarinin üretmediği kayıtlara dayanıyor; olay anında korunacak oturum logu yok. VPN logu, VPN'in kullanımda olup olmadığı belirsiz olduğu için (A9) de güvenilir değil.</td><td class="sev-o">Orta</td><td>Kanıt listesini “bugün var / hedef mimariyle gelecek” diye ayır; kayıt açmayı 0–30 gün adımına bağla (yol haritası #4).</td></tr>
+      <tr class="v2"><td>A20</td><td>Lab6 · 2 ↔ W5; EP 12</td><td>“bilinen-iyi yedekle sürüm/hash olarak karşılaştırırım”</td><td>Referans yedek, emniyet imzası (CRC) ve yedekleme prosedürü hiçbir föyde tanımlı değil; karşılaştırılacak “bilinen-iyi” sürüm yok.</td><td class="sev-o">Orta</td><td>Referans CRC'yi ve yedekleme prosedürünü tanımla (yol haritası #5, EP 12).</td></tr>
+      <tr class="v2"><td>A21</td><td>Lab6 · 1; Lab7 · 2–3, şema</td><td>“bariyeri güvenli durumda (yukarı, kilitli) tutar”; “bariyer güvenli durumda (yukarı, kilitli) kalır”; “kapatma komutu verilmez”</td><td>A2 çelişkisi Lab 6–7'ye taşınmış. Bariyer aşağıdaysa “yukarı kilitli” kalmak, kaçınılmak istenen hareketi gerektirir. Lab 7'de “kapatma” ile “yukarı kilitli” aynı paragrafta, yönü tanımlanmadan kullanılıyor.</td><td class="sev-o">Orta</td><td>Güvenli durum matrisini (W7) Lab 6–7'ye de uygula; “kapatma” teriminin yönünü tanımla.</td></tr>
+      <tr class="v2"><td>A22</td><td>Lab6 · 5</td><td>“14 gün — son rapor”</td><td>CRA Md. 14'te 14 günlük nihai rapor aktif istismar edilen zafiyete aittir ve düzeltici önlem hazır olduktan sonra işler; ciddi olayda nihai rapor 72 saatlik bildirimden itibaren bir ay içindedir. Senaryo (varsayılan parola istismarı + yetkisiz erişim) ikisini birden tetikleyebilir.</td><td class="sev-d">Düşük</td><td>İki süreyi ayrı yaz; kursun “14 gün”ünü zafiyet hattına bağla.</td></tr>
+      <tr class="v2"><td>A23</td><td>Lab7 · senaryo ↔ Lab7 · 1</td><td>Amaç “gereksiz duruşları azaltmak”; karar “koruma alanında nesne varsa YZ ‘araç’ dese bile kapanma engellenir”</td><td>İkisi birlikte tutarlı, ama YZ'nin fayda alanı yalnızca uyarı alanı ve normal kontrol yolu. Hedefe koruma alanını susturarak ulaşılırsa YZ emniyet fonksiyonuna girer (T12).</td><td class="sev-d">Düşük</td><td>YZ'nin hangi duruşları azaltacağını ve hangilerine asla dokunmayacağını yaz.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ EK B ============ -->
+<section class="page refs">
+  <p class="eyebrow">SWOT ANALİZİ · Ek B</p>
+  <h2>Ek B — Kaynakça</h2>
+  <p style="font-size:6.8pt;color:#4b5563">Web kaynaklarına erişim tarihi: 25.10.2026; [10]'a eklenen İrlanda NCSC sayfası: 16.11.2026. Bir olgunun yanında birden çok kaynak varsa birbirini teyit ediyordur. İkincil kaynaklardan alınan mevzuat yorumları, uygulama öncesinde resmî metinden doğrulanmalıdır.</p>
+  <h4>Bootcamp ve proje belgeleri</h4>
+  <ol start="1">
+    <li>RB-HRB_Lab1-5_Foyleri_v3-3.pdf (23.10.2026) ve RB-HRB_Lab6-7_Foyleri.pdf (06.11.2026) — Safety 4.0 Bootcamp Laboratuvar Föyleri, RB-HRB (SAMİB) Sürümü.</li>
+    <li>Safety 4.0 Readiness Bootcamp sunumu, INSPECCO (NANDO 2459) × Kriptarium — “Yazılım Müh Güncel Konular.pdf”.</li>
+    <li>Bootcamp Kavramlar Sözlüğü — “5. Kavramlar_Sozlugu.pdf”.</li>
+    <li>SAMİB üye listesi ekran görüntüleri (19.10.2026); “Arma Kontrol Group Company” ve “ARMA Filtre Sistemleri” ayrı üyeler.</li>
+  </ol>
+  <h4>Üretici ve sektör</h4>
+  <ol start="5">
+    <li>Ekonomi Gazetesi — Sakarya Makina İmalatçıları Birliği (SAMİB): https://www.ekonomigazetesi.com/sehirler/makine-sektoru-icin-rusya-federasyonu-ile-guclu-isbirligine-gidiyoruz-16409</li>
+    <li>CELTIC-NEXT — Arma Kontrol profili (2006'da kuruldu; road blocker, plaka tanıma; 60'tan fazla ülke): https://www.celticnext.eu/offering_expertise/arma-kontrol-19-11-2024-2/</li>
+    <li>Para Dergi, 15.02.2022 — “Arma Kontrol gözünü Avrupa'ya dikti” (65'ten fazla ülke; Avrupa satış hedefi): https://paradergi.com.tr/is-dunyasi-kulis/2022/02/15/arma-kontrol-gozunu-avrupaya-dikti</li>
+    <li>Axia (distribütör) — Arma Counter-Terror Telescopic Road Blocker RB-ATTRB-105, IWA 14-1:2013 V/7500[N3C]/80/90:0: https://www.axia.co.id/product/counter-terror-telescopic-road-blocker-rb-attrb-105/</li>
+  </ol>
+  <h4>Mevzuat ve standartlar</h4>
+  <ol start="9">
+    <li>Regulation (EU) 2024/2847 (Cyber Resilience Act): https://eur-lex.europa.eu/eli/reg/2024/2847/oj — madde metinleri (Md. 13(8), Md. 14, Md. 64(2), Ek I): https://www.springlex.eu/en/packages/cra/cra-regulation/</li>
+    <li>CRA bildirim rejimi (11.09.2026): CMS — https://cms.law/en/aut/legal-updates/ready-respond-report-the-cyber-resilience-act-s-reporting-regime-is-here ; Jones Day — https://www.jonesday.com/en/insights/2026/07/eu-cyber-resilience-act-24hour-reporting-duties-start-september-11-2026 ; nihai rapor süreleri (zafiyet 14 gün / ciddi olay bir ay): İrlanda NCSC — https://ncsc.gov.ie/cra/</li>
+    <li>Regulation (EU) 2023/1230 (Makine Tüzüğü): https://eur-lex.europa.eu/eli/reg/2023/1230/oj — EHSR 1.1.9/1.2.1 ve prEN 50742: Pilz — https://www.pilz.com/en-AT/trainings/articles/248511 ; IBF — https://www.ibf-solutions.com/fileadmin/dateidownloads/draft-mr-protection-aginst-corruption.pdf</li>
+    <li>Makine Tüzüğü Ek I Kısım A (öz-evrilen davranış), Avrupa Parlamentosu özeti: https://oeil.europarl.europa.eu/oeil/en/document-summary?id=1749182</li>
+    <li>IEC TS 63074:2023 (IEC TR 63074:2019'un yerini aldı): https://shop.standards.ie/en-ie/standards/iec-ts-63074-2023-1317862_saig_iec_iec_3224260/</li>
+    <li>DGUV/IFA (2024) — CRA ve Makine Tüzüğü için öngörülen uyumlaştırılmış standartlar: https://dguv.de/medien/ifa/de/vera/pdf/2024_ivss_security_schmid_ifa.pdf</li>
+    <li>ISO 22343-1:2023 (IWA 14-1:2013'ün yerini aldı): https://www.sis.se/en/produkter/civil-engineering/road-engineering/road-equipment-and-installations/iso-22343-12023/</li>
+    <li>EN 12453:2017+A1:2021 ve HSE itirazı (2011) / Komisyon uyarısı (2015) — DHF: https://dhfonline.org.uk/news/dhf-welcomes-amendment-to-bs-en-12453/818.htm</li>
+    <li>Directive (EU) 2022/2555 (NIS2), Md. 21(2)(d): https://eur-lex.europa.eu/eli/dir/2022/2555/oj — açıklama: https://nisd2.eu/en/wiki/law-and-consequences/nis2-supplier-contract-clauses</li>
+    <li>7545 sayılı Siber Güvenlik Kanunu (RG 19.03.2025, sayı 32846), Md. 7/1-b, 7/1-c, 16/10: https://www.alomaliye.com/2025/03/19/7545-sayili-siber-guvenlik-kanunu/</li>
+    <li>Directive (EU) 2024/2853 (Ürün Sorumluluğu): Reed Smith — https://www.reedsmith.com/en/perspectives/2025/07/eu-product-liability-directive-software-digital-products-cybersecurity ; Covington — https://www.insideprivacy.com/uncategorized/eu-member-states-begin-rolling-out-new-product-liability-rules/</li>
+    <li>KVKK Kurul kararı, otopark işletmesine 75.000 TL idari para cezası: https://halktv.com.tr/turkiye/kvkk-kanuna-aykiri-kisisel-veri-isleyen-otoparka-75-bin-lira-ceza-kesti-807170h</li>
+  </ol>
+  <h4>Tehdit ortamı ve teknik kaynaklar</h4>
+  <ol start="21">
+    <li>CISA AA23-335A — IRGC bağlantılı aktörlerin Unitronics PLC'leri istismarı (2023): https://cisa.gov/news-events/cybersecurity-advisories/aa23-335a</li>
+    <li>CISA MAR-17-352-01 — HatMan (TRITON/TRISIS), emniyet sistemlerini hedef alan zararlı yazılım: https://www.cisa.gov/sites/default/files/documents/MAR-17-352-01%20HatMan%E2%80%94Safety%20System%20Targeted%20Malware_S508C.pdf</li>
+    <li>OpenVPN — CVE-2020-15078: https://community.openvpn.net/openvpn/wiki/CVE-2020-15078 ; NVD — CVE-2020-11810: https://nvd.nist.gov/vuln/detail/CVE-2020-11810</li>
+    <li>OpenVPN sürüm destek durumu: https://endoflife.date/openvpn</li>
+    <li>Windows Embedded CE 6.0 yaşam döngüsü: https://en.wikipedia.org/wiki/Windows_Embedded_CE_6.0 ; Avnet — https://my.avnet.com/msembedded/licensing/eol-andeos-dates/</li>
+    <li>SICK — outdoorScan3, IEC TS 62998 kapsamında dış ortam için sertifikalı emniyet lazer tarayıcı: https://www.sick.com/us/en/sick-launches-first-ever-outdoor-safety-laser-scanner-outdoorscan3/w/press-outdoorscan3</li>
+    <li>road.cc — Watford'da yükselen bolard kazası: https://road.cc/?p=57086</li>
+  </ol>
+  <div class="box method" style="margin-top:10px">Bu belge bir eğitim çıktısıdır; resmî denetim, uygunluk değerlendirmesi veya belgelendirme değildir ve CE/mevzuat uygunluğu garantisi vermez. Doldurulan föylerle birlikte Machine Starter Pack'in parçasıdır.</div>
+</section>
+
+</body>
+</html>
